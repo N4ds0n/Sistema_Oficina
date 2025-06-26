@@ -67,7 +67,20 @@ public List<OrdemDeServico> getListaOrdensDeServico() {
         this.gerenciadorServicos = gerenciadorServicos;
         this.listaOrdensDeServico = carregarOrdensDeServico();
     }
-
+    
+    /**
+ * Busca uma Ordem de Servico (de qualquer status) pelo ID do agendamento associado.
+ * @param idAgendamento O ID do agendamento.
+ * @return A OrdemDeServico encontrada, ou null.
+ */
+public OrdemDeServico buscarOSPorAgendamentoId(int idAgendamento) {
+    for (OrdemDeServico os : listaOrdensDeServico) {
+        if (os.getIdAgendamento() == idAgendamento) {
+            return os;
+        }
+    }
+    return null;
+}
     /**
      * Cria uma nova Ordem de Servico associada a um agendamento.
      * @param agendamento O agendamento que esta dando origem a OS.

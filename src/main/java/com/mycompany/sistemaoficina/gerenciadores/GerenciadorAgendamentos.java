@@ -112,6 +112,7 @@ public class GerenciadorAgendamentos {
 
         try {
             int escolha = Integer.parseInt(scanner.nextLine());
+            //Cria uma copia da lista para nao alterar a ordem original permanentemente
             List<Agendamento> listaOrdenada = new ArrayList<>(this.listaAgendamentos);
 
             switch (escolha) {
