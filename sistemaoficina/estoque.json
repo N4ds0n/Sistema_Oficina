@@ -1,0 +1,32 @@
+[
+  {
+    "idProduto": 1,
+    "nome": "Filtro de Ar",
+    "descricao": "filtra impurezas do ar antes que ele entre no motor.",
+    "precoCusto": 20.0,
+    "precoVenda": 25.5,
+    "quantidadeEstoque": 20,
+    "idFornecedor": 1,
+    "nomeFornecedor": "Steve Rogers"
+  },
+  {
+    "idProduto": 2,
+    "nome": "Pneu",
+    "descricao": "Pneu é um Pneu uai",
+    "precoCusto": 300.0,
+    "precoVenda": 350.0,
+    "quantidadeEstoque": 10,
+    "idFornecedor": 1,
+    "nomeFornecedor": "Steve Rogers"
+  },
+  {
+    "idProduto": 3,
+    "nome": "Pastilhas de Freio",
+    "descricao": "Elementos de desgaste que garantem a frenagem eficiente ao pressionar os discos de freio.",
+    "precoCusto": 40.0,
+    "precoVenda": 50.0,
+    "quantidadeEstoque": 15,
+    "idFornecedor": 1,
+    "nomeFornecedor": "Steve Rogers"
+  }
+]

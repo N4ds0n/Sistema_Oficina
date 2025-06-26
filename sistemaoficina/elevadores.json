@@ -1,0 +1,17 @@
+[
+  {
+    "numero": 1,
+    "tipo": "Fixo (Alinhamento/Balanceamento)",
+    "ocupado": true
+  },
+  {
+    "numero": 2,
+    "tipo": "Corriqueiro",
+    "ocupado": false
+  },
+  {
+    "numero": 3,
+    "tipo": "Corriqueiro",
+    "ocupado": false
+  }
+]
