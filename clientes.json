@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1,
+    "nome": "Ernesto N. Silva",
+    "endereco": "rua primavera",
+    "telefone": "339898989",
+    "email": "@hotmail",
+    "cpfAnonimizado": "18929128182",
+    "veiculos": [
+      {
+        "modelo": "Ford KA",
+        "placa": "FOK-0808",
+        "cor": "prata",
+        "ano": 2015
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "nome": "Nadson Santos",
+    "endereco": "Beco dos Berens",
+    "telefone": "9182918",
+    "email": "@gmail",
+    "cpfAnonimizado": "2918291829182",
+    "veiculos": [
+      {
+        "modelo": "Chevrolet Opala",
+        "placa": "OPA-0909",
+        "cor": "preto",
+        "ano": 1973
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "nome": "Adam Warlock",
+    "endereco": "espaço sideral",
+    "telefone": "9898121212",
+    "email": "@warlock",
+    "cpfAnonimizado": "122982989",
+    "veiculos": [
+      {
+        "modelo": "Fiat UNO",
+        "placa": "UNO-8787",
+        "cor": "branco",
+        "ano": 2010
+      }
+    ]
+  }
+]

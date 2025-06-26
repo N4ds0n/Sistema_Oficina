@@ -1,0 +1,66 @@
+[
+  {
+    "idOrdemDeServico": 1,
+    "idAgendamento": 1,
+    "nomeCliente": "Nadson Santos",
+    "modeloVeiculo": "Chevrolet Opala",
+    "placaVeiculo": "OPA-0909",
+    "servicosRealizados": [
+      {
+        "idServico": 3,
+        "descricao": "Alinhamento e Balanceamento",
+        "valor": 150.0
+      },
+      {
+        "idServico": 1,
+        "descricao": "Alinhamento de direcao",
+        "valor": 80.0
+      }
+    ],
+    "pecasUtilizadas": [
+      {
+        "idProduto": 1,
+        "nome": "filtro de ar",
+        "descricao": "Filtrar o ar que entra no motor.",
+        "precoCusto": 30.0,
+        "precoVenda": 40.0,
+        "quantidadeEstoque": 13
+      }
+    ],
+    "valorTotal": 270.0,
+    "dataEmissao": "24/06/2025 16:46",
+    "status": "Aberta"
+  },
+  {
+    "idOrdemDeServico": 2,
+    "idAgendamento": 2,
+    "nomeCliente": "Adam Warlock",
+    "modeloVeiculo": "Fiat UNO",
+    "placaVeiculo": "UNO-8787",
+    "servicosRealizados": [
+      {
+        "idServico": 2,
+        "descricao": "Balanceamento de rodas(4x)",
+        "valor": 60.0
+      },
+      {
+        "idServico": 0,
+        "descricao": "Troca e balanceamento",
+        "valor": 50.0
+      }
+    ],
+    "pecasUtilizadas": [
+      {
+        "idProduto": 1,
+        "nome": "filtro de ar",
+        "descricao": "Filtrar o ar que entra no motor.",
+        "precoCusto": 30.0,
+        "precoVenda": 40.0,
+        "quantidadeEstoque": 12
+      }
+    ],
+    "valorTotal": 150.0,
+    "dataEmissao": "25/06/2025 18:41",
+    "status": "Finalizada"
+  }
+]

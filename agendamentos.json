@@ -1,0 +1,94 @@
+[
+  {
+    "idAgendamento": 1,
+    "cliente": {
+      "id": 2,
+      "nome": "Nadson Santos",
+      "endereco": "Beco dos Berens",
+      "telefone": "9182918",
+      "email": "@gmail",
+      "cpfAnonimizado": "2918291829182",
+      "veiculos": [
+        {
+          "modelo": "Chevrolet Opala",
+          "placa": "OPA-0909",
+          "cor": "preto",
+          "ano": 1973
+        }
+      ]
+    },
+    "veiculo": {
+      "modelo": "Chevrolet Opala",
+      "placa": "OPA-0909",
+      "cor": "preto",
+      "ano": 1973
+    },
+    "dataHora": "10/07/2025 10:30",
+    "descricaoProblema": "Alinhamento e Balanceamento",
+    "status": "Em Manutencao (Com Elevador)",
+    "valorRetidoCancelamento": 0.0,
+    "elevadorAlocado": {
+      "numero": 1,
+      "tipo": "Fixo (Alinhamento/Balanceamento)",
+      "ocupado": true
+    }
+  },
+  {
+    "idAgendamento": 2,
+    "cliente": {
+      "id": 3,
+      "nome": "Adam Warlock",
+      "endereco": "espaço sideral",
+      "telefone": "9898121212",
+      "email": "@warlock",
+      "cpfAnonimizado": "122982989",
+      "veiculos": [
+        {
+          "modelo": "Fiat UNO",
+          "placa": "UNO-8787",
+          "cor": "branco",
+          "ano": 2010
+        }
+      ]
+    },
+    "veiculo": {
+      "modelo": "Fiat UNO",
+      "placa": "UNO-8787",
+      "cor": "branco",
+      "ano": 2010
+    },
+    "dataHora": "25/06/2025 18:36",
+    "descricaoProblema": "Troca de pneu",
+    "status": "Entregue",
+    "valorRetidoCancelamento": 0.0
+  },
+  {
+    "idAgendamento": 3,
+    "cliente": {
+      "id": 1,
+      "nome": "Ernesto N. Silva",
+      "endereco": "rua primavera",
+      "telefone": "339898989",
+      "email": "@hotmail",
+      "cpfAnonimizado": "18929128182",
+      "veiculos": [
+        {
+          "modelo": "Ford KA",
+          "placa": "FOK-0808",
+          "cor": "prata",
+          "ano": 2015
+        }
+      ]
+    },
+    "veiculo": {
+      "modelo": "Ford KA",
+      "placa": "FOK-0808",
+      "cor": "prata",
+      "ano": 2015
+    },
+    "dataHora": "10/07/2025 10:30",
+    "descricaoProblema": "Manutencao geral",
+    "status": "Agendado",
+    "valorRetidoCancelamento": 0.0
+  }
+]
