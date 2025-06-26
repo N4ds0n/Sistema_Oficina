@@ -25,13 +25,8 @@
     },
     "dataHora": "10/07/2025 10:30",
     "descricaoProblema": "Alinhamento e Balanceamento",
-    "status": "Em Manutencao (Com Elevador)",
-    "valorRetidoCancelamento": 0.0,
-    "elevadorAlocado": {
-      "numero": 1,
-      "tipo": "Fixo (Alinhamento/Balanceamento)",
-      "ocupado": true
-    }
+    "status": "Entregue",
+    "valorRetidoCancelamento": 0.0
   },
   {
     "idAgendamento": 2,
@@ -88,7 +83,7 @@
     },
     "dataHora": "10/07/2025 10:30",
     "descricaoProblema": "Manutencao geral",
-    "status": "Agendado",
+    "status": "Entregue",
     "valorRetidoCancelamento": 0.0
   }
 ]

@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 /**
  * Classe responsavel por gerenciar todas as operacoes relacionadas a Agendamentos.
@@ -212,7 +213,6 @@ public class GerenciadorAgendamentos {
                     System.out.print("Escolha uma opcao: ");
                     String tipoEscolhido = scanner.nextLine();
                     
-                    // --- CORRECAO PRINCIPAL APLICADA AQUI ---
                     boolean alocado; // Declaracao da variavel
                     if (tipoEscolhido.equals("1")) {
                         alocado = this.gerenciadorElevadores.alocarElevadorPorTipo(agendamento, "Fixo");
@@ -279,19 +279,24 @@ public class GerenciadorAgendamentos {
         }
     }
 
+    /**
+     * Fluxo de trabalho para REGISTRAR A ENTREGA de um veiculo pronto
+     * e opcionalmente emitir a Nota Fiscal.
+     */
     private void registrarEntrega(Scanner scanner) {
         System.out.println("\n--- Registrar Entrega de Veiculo ---");
         
         System.out.println("\n--- Veiculos Prontos para Entrega ---");
-        boolean algumPronto = this.listaAgendamentos.stream()
+        List<Agendamento> agendamentosProntos = this.listaAgendamentos.stream()
             .filter(ag -> ag.getStatus().equalsIgnoreCase("Pronto para Entrega"))
-            .peek(System.out::println)
-            .findFirst().isPresent();
+            .collect(Collectors.toList());
 
-        if (!algumPronto) {
+        if (agendamentosProntos.isEmpty()) {
             System.out.println("Nenhum veiculo esta com o status 'Pronto para Entrega'.");
             return;
         }
+        
+        agendamentosProntos.forEach(System.out::println);
 
         System.out.print("\nDigite o ID do agendamento para registrar a ENTREGA: ");
         try {
@@ -299,9 +304,29 @@ public class GerenciadorAgendamentos {
             Agendamento agendamento = buscarAgendamentoPorId(id);
 
             if (agendamento != null && agendamento.getStatus().equalsIgnoreCase("Pronto para Entrega")) {
+                
+                // Busca a Ordem de Servico finalizada usando o novo metodo auxiliar
+                OrdemDeServico os = gerenciadorOS.buscarOSPorAgendamentoId(agendamento.getIdAgendamento());
+                
+                if (os == null) {
+                    System.out.println("ERRO GRAVE: Nao foi encontrada uma Ordem de Servico para este agendamento.");
+                    return;
+                }
+                
+                // Pergunta se o usuario deseja emitir a nota fiscal
+                System.out.print("Deseja emitir a Nota Fiscal para esta entrega? (S/N): ");
+                String resposta = scanner.nextLine();
+                
+                if (resposta.equalsIgnoreCase("S")) {
+                    // Chama a classe especialista para "imprimir" a nota no console
+                    GeradorNotaFiscal.emitirNotaFiscal(os);
+                }
+
+                // Finaliza o processo, mudando o status do agendamento
                 agendamento.setStatus("Entregue");
                 System.out.println("Status do agendamento ID " + id + " atualizado para: " + agendamento.getStatus());
-                salvarDadosAgendamentos();
+                salvarDadosAgendamentos(); // Salva a mudanca final do status
+
             } else {
                 System.out.println("Agendamento nao encontrado ou nao esta com o status 'Pronto para Entrega'.");
             }
