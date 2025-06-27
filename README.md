@@ -76,9 +76,3 @@ Todos os dados do sistema são armazenados em arquivos `.json` utilizando biblio
 
 Este sistema foi idealizado e implementado com foco no controle interno de uma oficina real, simulando o ambiente de trabalho e integrando conceitos de programação aprendidos ao longo da disciplina. 
 
----
-
-## 🤝 Contribuições
-
-Sinta-se livre para abrir issues, sugerir melhorias ou adaptar este projeto para a realidade da sua oficina.
-
