@@ -10,6 +10,7 @@ import java.util.Objects;
  * Representa a Ordem de Servico (OS), a fatura de um agendamento.
  * Contem todos os servicos realizados e pecas utilizadas.
  * ARMAZENA o ID do agendamento e alguns dados do cliente/veiculo para consulta rapida.
+ * @author santo
  */
 public class OrdemDeServico {
 
@@ -42,8 +43,12 @@ public class OrdemDeServico {
         this.status = "Aberta";
     }
 
-    // --- Metodos de Negocio ---
-
+    /**
+     * Métodos de Negócio
+     * Adiciona um servico a esta Ordem de Servico, desde que ela esteja "Aberta".
+     * Apos adicionar, o valor total e recalculado automaticamente.
+     * @param servico O objeto Servico a ser adicionado a lista.
+     */
     public void adicionarServico(Servico servico) {
         if (this.status.equals("Aberta")) {
             this.servicosRealizados.add(servico);
@@ -53,6 +58,11 @@ public class OrdemDeServico {
         }
     }
 
+    /**
+     * Adiciona uma peca a esta Ordem de Servico, desde que ela esteja "Aberta".
+     * Apos adicionar, o valor total e recalculado automaticamente.
+     * @param peca O objeto Produto a ser adicionado a lista.
+     */
     public void adicionarPeca(Produto peca) {
         if (this.status.equals("Aberta")) {
             this.pecasUtilizadas.add(peca);
@@ -62,6 +72,10 @@ public class OrdemDeServico {
         }
     }
 
+    /**
+     * Metodo privado para calcular o valor total da OS.
+     * E chamado internamente sempre que um novo item (servico ou peca) e adicionado.
+     */
     private void calcularEAtualizarValorTotal() {
         double total = 0.0;
         for (Servico servico : servicosRealizados) {
@@ -73,6 +87,10 @@ public class OrdemDeServico {
         this.valorTotal = total;
     }
 
+    /**
+     * Finaliza a Ordem de Servico, mudando seu status para "Finalizada".
+     * Isso impede que novos itens sejam adicionados e atualiza a data de emissao.
+     */
     public void finalizar() {
         this.status = "Finalizada";
         this.dataEmissao = LocalDateTime.now();
@@ -120,8 +138,12 @@ public class OrdemDeServico {
         return status;
     }
 
-    // Metodos Sobrescritos 
-
+    /**
+     * Métodos Sobrescritos:
+     * Fornece uma representacao textual resumida e formatada da Ordem de Servico.
+     * Ideal para listagens rapidas.
+     * @return Uma String contendo os principais dados da OS.
+     */
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -133,6 +155,11 @@ public class OrdemDeServico {
         return sb.toString();
     }
 
+    /**
+     * Compara duas Ordens de Servico pelo seu ID unico.
+     * @param o O objeto a ser comparado.
+     * @return true se os IDs forem iguais, false caso contrario.
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -141,6 +168,10 @@ public class OrdemDeServico {
         return idOrdemDeServico == that.idOrdemDeServico;
     }
 
+    /**
+     * Gera um codigo hash para a Ordem de Servico, baseado no seu ID.
+     * @return O codigo hash do objeto.
+     */
     @Override
     public int hashCode() {
         return Objects.hash(idOrdemDeServico);

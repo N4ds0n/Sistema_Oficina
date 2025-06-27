@@ -37,7 +37,10 @@ public class Despesa{
         this.categoria = categoria;
     }
     
-    // Getters e Setters:
+    /**
+     * Getters e Setters
+     * @return 
+     */
     public int getIdDespesa(){
         return idDespesa;
     }
@@ -79,7 +82,9 @@ public class Despesa{
     }
     
     /**
-     * Métodos Sobrescritos
+     * Métodos Sobrescritos.
+     * Fornece uma representação textual formatada do objeto Despesa.
+     * @return 
      */
     @Override
     public String toString() {
@@ -92,6 +97,11 @@ public class Despesa{
                 '}';
     }
 
+    /**
+     * Compara duas Despesas pelo seu ID unico.
+     * @param o O objeto a ser comparado.
+     * @return true se os IDs forem igual, false caso contrario
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -100,6 +110,10 @@ public class Despesa{
         return idDespesa == despesa.idDespesa;
     }
 
+    /**
+     * Gera um codigo hash para a despesa, baseado no seu ID.
+     * @return O codigo hash do objeto.
+     */
     @Override
     public int hashCode() {
         return Objects.hash(idDespesa);

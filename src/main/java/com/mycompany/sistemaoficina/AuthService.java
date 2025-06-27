@@ -9,7 +9,9 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
 /**
- * Classe responsavel pela autenticacao e geracao de IDs para Gerentes e Funcionarios.
+ * Classe responsavel pela lógica de autenticacao, alteração de senha e geracao de IDs para Gerentes e Funcionarios.
+ * Todos os metodos são estaticos, pois a classe não precisa guardar estado.
+ * @author santo
  */
 public class AuthService {
 
@@ -59,11 +61,11 @@ public class AuthService {
         return true;
     }
     
-    /**
-     * Verifica se ha algum gerente cadastrado.
-     * Para esta verificacao inicial, ainda precisamos carregar a lista internamente.
-     * Idealmente, isso seria feito por SistemaOficina ou Main.
-     */
+   /**
+    * Verifica se ha algum gerente cadastrado no sistema lendo o arquivo correspondente.
+    * Este método é util para o cluxo de inicialização do sistema, para forçar o cadastro do primeiro gerente caso nenhum exista.
+    * @return True se existe pelo menos um gerente, falso caso contrario.
+    */
     public static boolean existeGerenteCadastrado() {
         List<Gerente> gerentes = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader("gerentes.json"))) { // Caminho direto aqui
@@ -81,8 +83,7 @@ public class AuthService {
     }
 
     /**
-     * Autentica um gerente.
-     * Recebe a lista de gerentes como parametro.
+     * Autentica um gerente comparando o CPF e a senha fornecidos com uma lista de gerentes.
      * @param cpf CPF do gerente.
      * @param senha Senha do gerente.
      * @param listaGerentes A lista atual de gerentes em memoria.
@@ -98,7 +99,7 @@ public class AuthService {
     }
 
     /**
-     * Autentica um funcionario.
+     * Autentica um funcionario comparando o CPF e a senha fornecidos com uma lista de funcionários.
      * Recebe a lista de funcionarios como parametro.
      * @param cpf CPF do funcionario.
      * @param senha Senha do funcionario.
@@ -116,9 +117,9 @@ public class AuthService {
 
     /**
      * Gera um ID unico para um novo funcionario baseado na lista de funcionarios existente.
-     * Esta lista e fornecida pela SistemaOficina.
+     * Encontra o maior ID na lista existente e retorna o próximo numero.
      * @param funcionariosExistentes A lista atual de funcionarios em memoria.
-     * @return O proximo ID disponivel.
+     * @return O proximo ID inteiro disponivel.
      */
     public static int gerarIdUnicoFuncionario(List<Funcionario> funcionariosExistentes) {
         int maxId = 0;
@@ -134,8 +135,9 @@ public class AuthService {
     }
     
     /**
-     * Gera um ID unico para um novo gerente baseado na lista de gerentes existente.
+     * Gera um ID unico e sequencial para um novo gerente baseado na lista de gerentes existente.
      * Esta lista e fornecida pela Main (para o primeiro cadastro) ou SistemaOficina.
+     * Encontra o maior ID na lista existente e retorna o proximo numero.
      * @param gerentesExistentes A lista atual de gerentes em memoria.
      * @return O proximo ID disponivel.
      */

@@ -2,6 +2,12 @@ package com.mycompany.sistemaoficina;
 
 import java.util.Objects;
 
+/**
+ * Classe reponsável por alocar os elevadores, eles tem um numero que é seu identificador,
+ * Um tipo que indica se é um elevador fixo ou não.
+ * E um método que indica se o elevador esta ocupado ou não.
+ * @author santo
+ */
 public class Elevador {
 
     private int numero; //Identificador do elevador
@@ -20,7 +26,10 @@ public class Elevador {
         this.ocupado = false; // Elevador não ocupado por padrão ao ser criado
     }
 
-    //Getters e Setters 
+    /**
+     * Getters e Setters.
+     * @return 
+     */
     public int getNumero() {
         return numero;
     }
@@ -33,7 +42,6 @@ public class Elevador {
         return tipo;
     }
     
-    //  Retorno para void e tipo do parâmetro corrigido
     public void setTipo(String tipo) {
         this.tipo = tipo;
     }
@@ -42,7 +50,10 @@ public class Elevador {
         return ocupado;
     }
     
-    // Centralizando o controle de estado
+    /**
+     * Centraliza o controle de estado.
+     * @param ocupado 
+     */
     public void setOcupado(boolean ocupado) {
         this.ocupado = ocupado;
     }

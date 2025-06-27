@@ -10,7 +10,8 @@ import java.util.Objects;
 * Classe que representa um cliente do sistema de oficina.
 * Armazena informacoes pessoais e uma lista de veiculos associados ao cliente.
 * Implementa Comparable para permitir a ordenacao padrao por nome.
-*/
+* @author santo
+ */
 public class Clientes implements Comparable<Clientes> { // CORRECAO: "Comparable" com 'C' maiusculo
 
     private int id;
@@ -28,9 +29,15 @@ public class Clientes implements Comparable<Clientes> { // CORRECAO: "Comparable
         this.veiculos = new ArrayList<>();
     }
 
-    /**
-     * Construtor com todos os dados do cliente, incluindo o ID.
-     */
+   /**
+    * Construtor com todos os dados do cliente, incluindo o ID.
+    * @param id
+    * @param nome
+    * @param endereco
+    * @param telefone
+    * @param email
+    * @param cpfAnonimizado 
+    */
     public Clientes(int id, String nome, String endereco, String telefone, String email, String cpfAnonimizado) {
         this(); // Chama o construtor padrao para inicializar 'veiculos'
         this.id = id;
@@ -41,7 +48,10 @@ public class Clientes implements Comparable<Clientes> { // CORRECAO: "Comparable
         this.cpfAnonimizado = cpfAnonimizado;
     }
 
-    // --- Getters e Setters ---
+    /**
+     * Getters e Setters
+     * @return 
+     */
     public int getId(){
         return id;
     }
@@ -79,30 +89,55 @@ public class Clientes implements Comparable<Clientes> { // CORRECAO: "Comparable
     public void setCpfAnonimizado(String cpfAnonimizado) {
         this.cpfAnonimizado = cpfAnonimizado;
     }
+    
+    /**
+     * Retorna a lista de veiculos associada a este cliente.
+     * @return um ArrayList de objetos Veiculo.
+     */
     public ArrayList<Veiculo> getVeiculos() {
         return veiculos;
     }
+    /**
+     * Define a lista de veiculos para este cliente
+     * @param veiculos  a nova lista de veiculos.
+     */
     public void setVeiculos(ArrayList<Veiculo> veiculos) {
         this.veiculos = veiculos;
     }
 
-    // --- Metodos para manipular veiculos do cliente ---
+    /**
+     * Métodos para manipular veiculos do cliente.
+     * Adiciona um novo veiculo a lista de veiculos do cliente.
+     * @param veiculo O objeto Veiculo a ser adicionado
+     */
     public void adicionarVeiculo(Veiculo veiculo) {
         this.veiculos.add(veiculo);
     }
 
+    /**
+     * Substitui um veiculo existente na lista pelo seu ID.
+     * @param index O ID do veiculo a ser substituido.
+     * @param veiculo O novo objeto Veiculo que irá substitui-lo.
+     */
     public void editarVeiculo(int index, Veiculo veiculo) {
         if (index >= 0 && index < veiculos.size()) {
             veiculos.set(index, veiculo);
         }
     }
 
+    /**
+     * Remove um veiculo da lista pelo seu ID.
+     * @param index  O ID do veiculo a ser removido
+     */
     public void removerVeiculo(int index) {
         if (index >= 0 && index < veiculos.size()) {
             veiculos.remove(index);
         }
     }
 
+    /**
+     * Exibe no concole a lista de veiculos deste cliente, com seus respectivos IDs.
+     */
     public void listarVeiculos() {
         if (veiculos.isEmpty()) {
             System.out.println("Nenhum veiculo cadastrado para este cliente.");
@@ -132,6 +167,12 @@ public class Clientes implements Comparable<Clientes> { // CORRECAO: "Comparable
      * Uma classe pode ter varios Comparators para diferentes tipos de ordenacao.
      */
     public static class ClientePorIdComparator implements Comparator<Clientes> {
+        /**
+         * Compara dois clientes com base em seu ID.
+         * @param c1 o primeiro cliente a ser comparado.
+         * @param c2 o segundo cliente a ser comparado.
+         * @return um valor negativo, zero ou positivo se o ID de c1 for menor, igual ou maior que o de c2.
+         */
         @Override
         public int compare(Clientes c1, Clientes c2) {
             // Integer.compare e a forma mais segura e eficiente de comparar dois numeros inteiros.
@@ -140,7 +181,9 @@ public class Clientes implements Comparable<Clientes> { // CORRECAO: "Comparable
     }
     
     /**
-     * Metodo para cadastrar um novo cliente com entrada via terminal.
+     * Metodo estatico para cadastrar um novo cliente.
+     * @param idCliente O ID unico a ser atribuido ao novo cliente.
+     * @return O objeto preenchido com os dados inseridos pelo usuario do sistema.
      */
     public static Clientes cadastrarCliente(int idCliente) {
         Scanner scanner = new Scanner(System.in);
@@ -174,7 +217,9 @@ public class Clientes implements Comparable<Clientes> { // CORRECAO: "Comparable
     }
 
     /**
-     * Metodo estatico para editar os dados de um cliente.
+     * Metodo estaticoo para conduzir o fluxo de edição dos dados de um cliente.
+     * @param cliente O objeto Cliente a ser editado
+     * @return O objeto Cliente ja atualizado.
      */
     public static Clientes editarCliente(Clientes cliente){
         Scanner scanner = new Scanner(System.in);
@@ -213,7 +258,8 @@ public class Clientes implements Comparable<Clientes> { // CORRECAO: "Comparable
     }
 
     /**
-     * Metodo para editar ou adicionar veiculos ao cliente.
+     * Método para editar ou adicionar veiculos a um cliente existente.
+     * @param cliente O cliente cujos veiculos serão editados ou adicionados.
      */
     public static void editarVeiculos(Clientes cliente) {
         Scanner scanner = new Scanner(System.in);
@@ -238,7 +284,8 @@ public class Clientes implements Comparable<Clientes> { // CORRECAO: "Comparable
     }
 
     /**
-     * Metodo para cadastrar um veiculo.
+     * Método auxiliar para cadastrar os dados de um veiculo.
+     * @return Um novo Objeto preenchido.
      */
     public static Veiculo cadastrarVeiculo() {
         Scanner scanner = new Scanner(System.in);
@@ -253,13 +300,10 @@ public class Clientes implements Comparable<Clientes> { // CORRECAO: "Comparable
         
         return new Veiculo(modelo, placa, cor, ano);
     }
-    
+
     /**
      * Representacao textual resumida do cliente.
-     */
-    
-    /**
-     * Representacao textual resumida do cliente.
+     * @return Uma String formatada com os principais dados do cliente.
      */
     @Override
     public String toString() {
@@ -268,6 +312,11 @@ public class Clientes implements Comparable<Clientes> { // CORRECAO: "Comparable
             id, nome, telefone, email, veiculos.size());
     }
 
+    /**
+     * Compara dois clientes pelo seu  ID unico.
+     * @param o O objeto a ser comparado.
+     * @return true se os IDs forem iguals, false caso contrario.
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -276,11 +325,20 @@ public class Clientes implements Comparable<Clientes> { // CORRECAO: "Comparable
         return id == clientes.id;
     }
 
+    /**
+     * Gera um codigo hash para o Cliente, baseado no seu ID.
+     * @return  O codigo hash do objeto.
+     */
     @Override
     public int hashCode() {
         return Objects.hash(id);
     }
 
+    /**
+     * Metodo estático para gerar o proximo ID de cliente disponível.
+     * @param listaClientesExistente A lista de todos os clientes atualmente no sistema.
+     * @return O proximo ID inteiro sequencial.
+     */
     public static int gerarProximoIdCliente(List<Clientes> listaClientesExistente) {
         int maxId = 0;
         if (listaClientesExistente != null) {

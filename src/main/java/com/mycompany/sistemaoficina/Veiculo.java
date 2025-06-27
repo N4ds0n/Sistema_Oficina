@@ -51,8 +51,9 @@ public class Veiculo {
         this.ano = ano;
     }
 
-   // Getters estaticos para acessar os contadores
-    
+   /**
+    * Getters estaticos para acessar os contadores
+    */
     /**
      * Metodo de classe (static) para obter a contagem da variavel privada.
      * @return O numero total de instancias de Veiculo criadas.
@@ -108,6 +109,11 @@ public class Veiculo {
         return modelo + " (" + placa + ") - " + ano + " - " + cor;
     }
 
+    /**
+     * Compara dois objetos Veiculo. A comparação é baseada na placa que é considerada o identificador unico de um veículo.
+     * @param o O objeto a ser comparado
+     * @return true se as placas forem iguais (Ignorando maiusculas/minusculas), false caso contrario
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -116,6 +122,10 @@ public class Veiculo {
         return Objects.equals(placa.toLowerCase(), veiculo.placa.toLowerCase());
     }
 
+    /**
+     * Gera um codigo hash para o Veiculo, baseado na sua pllaca
+     * @return o codigo hash do objeto
+     */
     @Override
     public int hashCode() {
         return Objects.hash(placa.toLowerCase());

@@ -12,13 +12,21 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- * Gerencia todas as operacoes relacionadas aos Gerentes do sistema.
+ * Classe responsavel por gerenciar todas as operacoes relacionadas a Gerentes.
+ * Inclui carregamento, salvamento e operacoes como Editar senha e o cadastro exigindo nome e CPF.
+ * @author santo
  */
 public class GerenciadorGerentes {
 
+    // Lista de gerentes gerenciada em memoria por esta classe.
     private List<Gerente> listaGerentes;
+    // Caminho do arquivo JSON para persistencia dos dados dos gerentes. 
     private static final String ARQUIVO_GERENTES_JSON = "gerentes.json";
 
+     /**
+     * Construtor do GerenciadorGerentes.
+     * Carrega os dados dos gerentes do arquivo JSON ao ser instanciado.
+     */
     public GerenciadorGerentes() {
         this.listaGerentes = carregarDadosGerentes();
     }
@@ -33,9 +41,9 @@ public class GerenciadorGerentes {
 
     /**
      * Exibe um menu para o gerente logado gerenciar seus proprios dados,
-     * focando na alteracao segura da senha.
-     * @param gerenteLogado O objeto do gerente que esta usando o sistema.
-     * @param scanner Scanner para entrada do usuario.
+     * com foco na alteracao segura da senha.
+     * @param gerenteLogado O objeto do gerente que esta a usar o sistema.
+     * @param scanner A instancia do Scanner para ler a entrada do usuario.
      */
     public void gerenciarMeusDadosGerente(Gerente gerenteLogado, Scanner scanner) {
         int opcao;
@@ -71,9 +79,10 @@ public class GerenciadorGerentes {
         } while (opcao != 0);
     }
     
-    /**
-     * Metodo para cadastrar o primeiro gerente do sistema, caso nao exista nenhum.
-     * @param scanner Scanner para ler a entrada do usuario.
+   /**
+     * Cadastra o primeiro gerente no sistema, caso nao exista nenhum.
+     * Este metodo e essencial para a inicializacao do sistema.
+     * @param scanner A instancia do Scanner para ler a entrada do usuario.
      */
     public void cadastrarGerenteInicial(Scanner scanner) {
         if (!listaGerentes.isEmpty()) {
@@ -95,6 +104,10 @@ public class GerenciadorGerentes {
         System.out.println("Gerente inicial cadastrado com sucesso!");
     }
 
+    /**
+     * Persiste a lista atual de gerentes no arquivo gerentes.json.
+     * Utiliza a biblioteca Gson para serializar a lista de objetos.
+     */
     private void salvarDadosGerentes() {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         try (Writer writer = new FileWriter(ARQUIVO_GERENTES_JSON)) {
@@ -104,6 +117,11 @@ public class GerenciadorGerentes {
         }
     }
 
+    /**
+     * Carrega a lista de gerentes a partir do arquivo JSON.
+     * Se o arquivo nao for encontrado, inicializa uma lista vazia.
+     * @return Uma {@code List<Gerente>} com os dados carregados ou uma lista vazia.
+     */
     private List<Gerente> carregarDadosGerentes() {
         try (Reader reader = new FileReader(ARQUIVO_GERENTES_JSON)) {
             List<Gerente> gerentes = new Gson().fromJson(reader, new TypeToken<List<Gerente>>(){}.getType());

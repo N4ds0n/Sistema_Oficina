@@ -24,13 +24,23 @@ public class Agendamento implements Comparable<Agendamento> {
     private Elevador elevadorAlocado; 
 
     /**
-     * Construtor padrao da classe Agendamento (para uso do Gson).
+     * Construtor padrao da classe Agendamento.
+     * Define o status inicial como "Agendado".
+     * E utilizado pela biblioteca Gson para criar objetos a partir do JSON.
      */
     public Agendamento() {
         this.status = "Agendado";
         this.elevadorAlocado = null; 
     }
 
+    /**
+     * Construtor completo para criar um novo agendamento com os dados iniciais.
+     * @param idAgendamento O ID unico do agendamento.
+     * @param cliente O objeto Cliente associado.
+     * @param veiculo O objeto Veiculo associado.
+     * @param dataHora A data e hora do agendamento.
+     * @param descricaoProblema A descricao inicial do problema do veiculo.
+     */
     public Agendamento(int idAgendamento, Clientes cliente, Veiculo veiculo, LocalDateTime dataHora, String descricaoProblema) {
         this();
         this.idAgendamento = idAgendamento;
@@ -43,7 +53,9 @@ public class Agendamento implements Comparable<Agendamento> {
         // O atributo elevadorAlocado já é inicializado como null pela chamada a this()
     }
 
-    // Getters e Setters 
+    /**
+     * Getters e Setters 
+     */
     public Elevador getElevadorAlocado() {
         return elevadorAlocado;
     }
@@ -128,20 +140,26 @@ public class Agendamento implements Comparable<Agendamento> {
             return 0;
         }
         if (this.dataHora == null) {
-            return 1; // Coloca os nulos no final
+            return 1; //Coloca os agendamentos sem data no final da lista.
         }
         if (outroAgendamento.dataHora == null) {
-            return -1; // Coloca os nulos no final
+            return -1; // Coloca os agendamentos sem data no final da lista.
         }
         return this.dataHora.compareTo(outroAgendamento.dataHora);
     }
 
-    /**
-     * Um Comparator para fornecer uma forma alternativa de ordenar agendamentos, pelo seu status.
-     */
+   /**
+    * Um comparator para fornecer uma forma alternativa de ordenar agendamentos, pelo seu status.
+    * Permite agrupar os agendamentos por "Agendado", "Em Manutenção", etc...
+    */
     public static class AgendamentoPorStatusComparator implements Comparator<Agendamento> {
+        /**
+         * Compara dois agendamentos por ordem alfabética.
+         * @param a1 o primeiro agendamento a ser comparado.
+         * @param a2 o segundo agendamento a ser comparado.
+         * @return um valor negativo, zero ou positivo se o status de a1 for menor, igual ou maior que o de a2.
+         */
         public int compare(Agendamento a1, Agendamento a2) {
-            // Compara os status em ordem alfabetica.
             return a1.getStatus().compareToIgnoreCase(a2.getStatus());
         }
     }

@@ -13,7 +13,9 @@ import java.util.Scanner;
 
 /**
  * Gerencia todas as operacoes relacionadas ao estoque de produtos da oficina.
- * Controla o inventario de pecas, incluindo adicao, atualizacao e persistencia de dados.
+ * Controla o inventario de pecas, incluindo adicao, atualizacao e persistencia de dados,
+ * alem de interagir com o GerenciadorFornecedores para vincular produtos a sua origem.
+ * @author santo
  */
 public class GerenciadorEstoque {
 
@@ -22,12 +24,19 @@ public class GerenciadorEstoque {
     private boolean dadosForamModificados;
     private final GerenciadorFornecedores gerenciadorFornecedores;
 
+    /**
+     * Retorna a lista de produtos atualmente em memoria.
+     * @return A lista de objetos Produto.
+     */
 public List<Produto> getListaProdutos(){
     return this.listaProdutos;
 }
 
-    /**
-     * Construtor. Carrega os produtos do arquivo JSON ao iniciar.
+/**
+     * Construtor da classe GerenciadorEstoque.
+     * Carrega os produtos previamente salvos do arquivo JSON e recebe a dependencia
+     * do GerenciadorFornecedores para poder interagir com ele.
+     * @param gf A instancia principal do GerenciadorFornecedores.
      */
     public GerenciadorEstoque(GerenciadorFornecedores gf) {
         this.gerenciadorFornecedores = gf;
@@ -35,9 +44,10 @@ public List<Produto> getListaProdutos(){
         this.dadosForamModificados = false;
     }
 
-    /**
-     * Método Principal Menu
-     * @param scanner 
+   /**
+     * Exibe o menu principal para a gestao do estoque.
+     * Permite ao usuario acessar as funcionalidades de cadastro, listagem, busca e atualizacao de produtos.
+     * @param scanner A instancia do Scanner para ler a entrada do usuario.
      */
     public void gerenciarEstoque(Scanner scanner) {
         int opcao;
@@ -91,8 +101,9 @@ public List<Produto> getListaProdutos(){
     }
     
     /**
-     * Métodos de fluxo de trabalho
-     * @param scanner 
+     * Conduz o fluxo de trabalho para cadastrar um novo produto.
+     * Exige a selecao de um fornecedor ja cadastrado para vincular ao produto.
+     * @param scanner A instancia do Scanner para ler a entrada do usuario.
      */
     private void adicionarNovoProduto(Scanner scanner) {
         System.out.println("\n--- Adicionar Novo Produto ao Estoque ---");
@@ -140,6 +151,11 @@ public List<Produto> getListaProdutos(){
         }
     }
 
+    /**
+     * Conduz o fluxo de trabalho para adicionar quantidade a um produto ja existente no estoque.
+     * Simula a entrada de mercadoria de um fornecedor.
+     * @param scanner A instancia do Scanner para ler a entrada do usuario.
+     */
     private void entradaDeEstoque(Scanner scanner) {
         System.out.println("\n--- Adicionar Estoque (Entrada de Fornecedor) ---");
         listarProdutos();
@@ -165,6 +181,10 @@ public List<Produto> getListaProdutos(){
         }
     }
 
+    /**
+     * Busca um produto pelo seu ID e exibe todos os seus detalhes na tela.
+     * @param scanner A instancia do Scanner para ler a entrada do usuario.
+     */
     private void buscarEExibirProduto(Scanner scanner) {
         System.out.print("\nDigite o ID do produto que deseja buscar: ");
         try {
@@ -187,6 +207,10 @@ public List<Produto> getListaProdutos(){
         }
     }
 
+    /**
+     * Pede ao usuario a confirmacao para salvar as alteracoes pendentes no arquivo JSON.
+     * @param scanner A instancia do Scanner para ler a entrada do usuario.
+     */
     private void confirmarESalvar(Scanner scanner) {
         if (!dadosForamModificados) {
             System.out.println("Nenhuma alteracao pendente para salvar.");
@@ -203,8 +227,9 @@ public List<Produto> getListaProdutos(){
     }
 
    /**
-    * Métodos auxiliares de persistencia
-    */
+    * Métodos Auxiliares:
+     * Exibe no console uma lista de todos os produtos atualmente em estoque.
+     */
     public void listarProdutos() {
         System.out.println("\n--- Lista de Produtos em Estoque ---");
         if (this.listaProdutos.isEmpty()) {
@@ -217,6 +242,11 @@ public List<Produto> getListaProdutos(){
         System.out.println("------------------------------------");
     }
 
+    /**
+     * Busca um produto na lista em memoria pelo seu ID unico.
+     * @param idProduto O ID do produto a ser procurado.
+     * @return O objeto {@code Produto} se encontrado, ou {@code null}.
+     */
     public Produto buscarProdutoPorId(int idProduto) {
         for (Produto produto : this.listaProdutos) {
             if (produto.getIdProduto() == idProduto) {
@@ -226,6 +256,10 @@ public List<Produto> getListaProdutos(){
         return null;
     }
 
+    /**
+     * Gera um novo ID sequencial para um novo produto.
+     * @return O proximo ID inteiro disponivel.
+     */
     private int gerarProximoIdProduto() {
         if (listaProdutos.isEmpty()) {
             return 1;
@@ -236,6 +270,9 @@ public List<Produto> getListaProdutos(){
                 .orElse(0) + 1;
     }
 
+    /**
+     * Persiste a lista atual de produtos no arquivo estoque.json.
+     */
     public void salvarEstoque() {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         try (Writer writer = new FileWriter(ARQUIVO_ESTOQUE_JSON)) {
@@ -246,6 +283,10 @@ public List<Produto> getListaProdutos(){
         }
     }
 
+    /**
+     * Carrega a lista de produtos a partir do arquivo estoque.json.
+     * @return Uma {@code List<Produto>} com os dados carregados ou uma lista vazia.
+     */
     private List<Produto> carregarEstoque() {
         try (Reader reader = new FileReader(ARQUIVO_ESTOQUE_JSON)) {
             Gson gson = new Gson();

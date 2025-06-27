@@ -22,16 +22,20 @@ import java.util.stream.Collectors;
 
 /**
  * Gerencia todas as operacoes relacionadas as Ordens de Servico (OS).
+ * E responsavel por criar, buscar, modificar e persistir as Ordens de Servico,
+ * atuando como a central de faturamento do sistema.
+ * @author santo
  */
 public class GerenciadorOrdensDeServico {
 
     private List<OrdemDeServico> listaOrdensDeServico;
     private static final String ARQUIVO_OS_JSON = "ordens_de_servico.json";
 
+    // Dependencias de outros gerenciadores para consulta de dados.
     private GerenciadorEstoque gerenciadorEstoque;
     private GerenciadorServicos gerenciadorServicos;
 
-
+    // Adaptador para que a biblioteca Gson saiba como lidar com o tipo LocalDateTime.
     private static final TypeAdapter<LocalDateTime> LOCAL_DATE_TIME_ADAPTER = new TypeAdapter<>() {
         private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 
@@ -62,13 +66,19 @@ public List<OrdemDeServico> getListaOrdensDeServico() {
 }
 
 
+    /**
+     * Construtor do GerenciadorOrdensDeServico.
+     * Recebe as instancias de outros gerenciadores para poder colaborar com eles.
+     * @param gerenciadorEstoque A instancia principal do GerenciadorEstoque.
+     * @param gerenciadorServicos A instancia principal do GerenciadorServicos.
+     */
     public GerenciadorOrdensDeServico(GerenciadorEstoque gerenciadorEstoque, GerenciadorServicos gerenciadorServicos) {
         this.gerenciadorEstoque = gerenciadorEstoque;
         this.gerenciadorServicos = gerenciadorServicos;
         this.listaOrdensDeServico = carregarOrdensDeServico();
     }
     
-    /**
+ /**
  * Busca uma Ordem de Servico (de qualquer status) pelo ID do agendamento associado.
  * @param idAgendamento O ID do agendamento.
  * @return A OrdemDeServico encontrada, ou null.
@@ -83,6 +93,7 @@ public OrdemDeServico buscarOSPorAgendamentoId(int idAgendamento) {
 }
     /**
      * Cria uma nova Ordem de Servico associada a um agendamento.
+     * A OS e criada com status "Aberta" e e imediatamente persistida.
      * @param agendamento O agendamento que esta dando origem a OS.
      * @return A OrdemDeServico recem-criada.
      */
@@ -95,6 +106,11 @@ public OrdemDeServico buscarOSPorAgendamentoId(int idAgendamento) {
         return novaOS;
     }
 
+    /**
+     * Busca uma Ordem de Servico que esteja com o status "Aberta" associada a um agendamento.
+     * @param agendamento O agendamento a ser verificado.
+     * @return A OrdemDeServico aberta se encontrada, ou null.
+     */
     public OrdemDeServico buscarOSAbertaPorAgendamento(Agendamento agendamento) {
         for (OrdemDeServico os : listaOrdensDeServico) {
             if (os.getIdAgendamento() == agendamento.getIdAgendamento() 
@@ -106,7 +122,7 @@ public OrdemDeServico buscarOSPorAgendamentoId(int idAgendamento) {
     }
 
     /**
-     * Menu principal para lancar itens em uma Ordem de Servico aberta.
+     * Exibe o menu principal para lancar itens em uma Ordem de Servico que esta aberta.
      * @param scanner Scanner para entrada do usuario.
      */
     public void menuLancarItens(Scanner scanner) {
@@ -142,7 +158,9 @@ public OrdemDeServico buscarOSPorAgendamentoId(int idAgendamento) {
     }
 
     /**
-     * Submenu para adicionar servicos, pecas ou mao de obra a uma OS especifica.
+     * Apresenta um submenu para adicionar servicos, pecas ou mao de obra a uma OS especifica.
+     * @param scanner A instancia do Scanner para ler a entrada do usuario.
+     * @param os A Ordem de Servico que sera modificada.
      */
     private void menuDeAdicao(Scanner scanner, OrdemDeServico os) {
         int opcao;
@@ -185,6 +203,11 @@ public OrdemDeServico buscarOSPorAgendamentoId(int idAgendamento) {
         } while (opcao != 0);
     }
 
+     /**
+     * Conduz o fluxo para adicionar um servico do catalogo a uma OS.
+     * @param scanner A instancia do Scanner para ler a entrada do usuario.
+     * @param os A Ordem de Servico que sera modificada.
+     */
     private void lancarServicoEmOS(Scanner scanner, OrdemDeServico os) {
         gerenciadorServicos.listarServicos();
         if (gerenciadorServicos.getListaServicos().isEmpty()) {
@@ -208,6 +231,12 @@ public OrdemDeServico buscarOSPorAgendamentoId(int idAgendamento) {
         }
     }
 
+    /**
+     * Conduz o fluxo para adicionar uma peca do estoque a uma OS.
+     * Realiza a baixa no estoque ao adicionar a peca.
+     * @param scanner A instancia do Scanner para ler a entrada do usuario.
+     * @param os A Ordem de Servico que sera modificada.
+     */
     private void lancarPecaEmOS(Scanner scanner, OrdemDeServico os) {
         gerenciadorEstoque.listarProdutos();
         if (gerenciadorEstoque.getListaProdutos().isEmpty()) {
@@ -237,6 +266,11 @@ public OrdemDeServico buscarOSPorAgendamentoId(int idAgendamento) {
         }
     }
 
+    /**
+     * Conduz o fluxo para adicionar uma cobranca de mao de obra personalizada a OS.
+     * @param scanner A instancia do Scanner para ler a entrada do usuario.
+     * @param os A Ordem de Servico que sera modificada.
+     */
     private void lancarMaoDeObraEmOS(Scanner scanner, OrdemDeServico os) {
         System.out.println("\n--- Adicionar Mao de Obra Adicional ---");
         try {
@@ -260,6 +294,11 @@ public OrdemDeServico buscarOSPorAgendamentoId(int idAgendamento) {
         }
     }
     
+    /**
+     * Busca uma Ordem de Servico na lista pelo seu ID.
+     * @param id O ID da OS a ser procurada.
+     * @return O objeto {@code OrdemDeServico} se encontrado, ou {@code null}.
+     */
     public OrdemDeServico buscarOSPorId(int id) {
         for(OrdemDeServico os : listaOrdensDeServico) {
             if(os.getIdOrdemDeServico() == id) {
@@ -269,6 +308,10 @@ public OrdemDeServico buscarOSPorAgendamentoId(int idAgendamento) {
         return null;
     }
 
+    /**
+     * Gera um novo ID sequencial para uma nova Ordem de Servico.
+     * @return O proximo ID inteiro disponivel.
+     */
     private int gerarProximoIdOS() {
         if (listaOrdensDeServico.isEmpty()) {
             return 1;
@@ -276,8 +319,11 @@ public OrdemDeServico buscarOSPorAgendamentoId(int idAgendamento) {
         return listaOrdensDeServico.stream().mapToInt(OrdemDeServico::getIdOrdemDeServico).max().orElse(0) + 1;
     }
 
+    /**
+     * Persiste a lista atual de Ordens de Servico no arquivo ordens_de_servico.json.
+     * Cria o Gson com o adaptador de data/hora registrado
+     */
     public void salvarOrdensDeServico() {
-        // CORRECAO: Cria o Gson com o adaptador de data/hora registrado
         Gson gson = new GsonBuilder()
                 .setPrettyPrinting()
                 .registerTypeAdapter(LocalDateTime.class, LOCAL_DATE_TIME_ADAPTER)
@@ -289,6 +335,10 @@ public OrdemDeServico buscarOSPorAgendamentoId(int idAgendamento) {
         }
     }
 
+    /**
+     * Carrega a lista de Ordens de Servico a partir do arquivo ordens_de_servico.json.
+     * @return Uma {@code List<OrdemDeServico>} com os dados carregados ou uma lista vazia.
+     */
     private List<OrdemDeServico> carregarOrdensDeServico() {
         try (Reader reader = new FileReader(ARQUIVO_OS_JSON)) {
             // CORRECAO: Cria o Gson com o adaptador de data/hora registrado

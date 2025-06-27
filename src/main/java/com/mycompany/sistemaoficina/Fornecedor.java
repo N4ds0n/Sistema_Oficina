@@ -3,7 +3,8 @@ package com.mycompany.sistemaoficina;
 import java.util.Objects;
 
 /**
- * Representa um fornecedor de peças para a Oficina
+ * Representa um fornecedor de peças para a Oficina.
+ * Armazena informações cadastrais como nome, CNPJ e contatos.
  * @author santo
  */
 public class Fornecedor {
@@ -17,6 +18,7 @@ public class Fornecedor {
 
     /**
      * Construtor padrao.
+     * Utilizado pela biblioteca Gson para criar objetos a partir do JSON.
      */
     public Fornecedor() {
     }
@@ -39,8 +41,9 @@ public class Fornecedor {
         this.email = email;
     }
 
-    // --- Getters e Setters ---
-
+    /**
+     * Getters e Setters
+     */
     public int getIdFornecedor() {
         return idFornecedor;
     }
@@ -89,8 +92,11 @@ public class Fornecedor {
         this.email = email;
     }
 
-    // --- Metodos Sobrescritos ---
-
+    /**
+     * Métodos Sobrescritos.
+     * Fornece uma representação textual resumida do Fornecedor.
+     * @return Uma String formatada com os principais dados do fornecedor.
+     */
     @Override
     public String toString() {
         return "Fornecedor{" +
@@ -100,7 +106,12 @@ public class Fornecedor {
                 ", telefone='" + telefone + '\'' +
                 '}';
     }
-
+    
+    /**
+     * Compara dois fornecedores pelo seu ID unico.
+     * @param o O objeto a ser comparado.
+     * @return true se os IDs forem iguais, falso caso contrario
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -109,6 +120,10 @@ public class Fornecedor {
         return idFornecedor == that.idFornecedor;
     }
 
+    /**
+     * Gera um codigo hash para o Fornecedor, baseado no seu ID.
+     * @return  O codigo hash do objeto.
+     */
     @Override
     public int hashCode() {
         return Objects.hash(idFornecedor);

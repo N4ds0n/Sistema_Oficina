@@ -13,30 +13,36 @@ import java.util.Scanner;
 /**
  * Gerencia o catálogo de serviços oferecidos pela oficina.
  * Permite criar, listar, editar e remover serviços, com persistência em JSON.
+ * @author santo
  */
 public class GerenciadorServicos {
 
     private List<Servico> listaServicos;
     private static final String ARQUIVO_SERVICOS_JSON = "servicos.json";
     private boolean dadosForamModificados;
-    
+ 
+    /**
+     * Retorna a lista de todos os servicos cadastrados no catalogo.
+     * @return A lista de objetos Servico.
+     */
     public List<Servico> getListaServicos(){
         return this.listaServicos;
     }
 
     /**
-     * Construtor. Carrega os serviços do arquivo JSON ao iniciar.
+     * Construtor da classe GerenciadorServicos.
+     * Carrega os servicos previamente salvos do arquivo JSON ao ser instanciado.
      */
     public GerenciadorServicos() {
         this.listaServicos = carregarServicos();
         this.dadosForamModificados = false;
     }
     
-    /**
-     * Menu Catalogo de Serviços
-     * @param scanner 
+  /**
+     * Exibe o menu principal para a gestao do catalogo de servicos.
+     * Permite ao usuario acessar as funcionalidades de cadastro, listagem e edicao.
+     * @param scanner A instancia do Scanner para ler a entrada do usuario.
      */
-
     public void gerenciarServicos(Scanner scanner) {
         int opcao;
         do {
@@ -77,8 +83,8 @@ public class GerenciadorServicos {
     }
 
     /**
-     * Métodos de fluxo de trabalho
-     * @param scanner 
+     * Conduz o fluxo de trabalho para cadastrar um novo servico no catalogo.
+     * @param scanner A instancia do Scanner para ler a entrada do usuario.
      */
     private void cadastrarNovoServico(Scanner scanner) {
         System.out.println("\n--- Cadastrar Novo Servico ---");
@@ -99,6 +105,10 @@ public class GerenciadorServicos {
         }
     }
     
+    /**
+     * Conduz o fluxo de trabalho para editar um servico existente.
+     * @param scanner A instancia do Scanner para ler a entrada do usuario.
+     */
     private void editarServico(Scanner scanner) {
         System.out.println("\n--- Editar Servico ---");
         listarServicos();
@@ -139,6 +149,10 @@ public class GerenciadorServicos {
         }
 }
 
+    /**
+     * Pede ao usuario a confirmacao para salvar as alteracoes pendentes no arquivo JSON.
+     * @param scanner A instancia do Scanner para ler a entrada do usuario.
+     */
 private void confirmarESalvar(Scanner scanner) {
         if (!dadosForamModificados) {
             System.out.println("Nenhuma alteracao pendente para salvar.");
@@ -154,7 +168,9 @@ private void confirmarESalvar(Scanner scanner) {
         }
     }
 
-    // Métodos auxiliares de persistencia
+ /**
+     * Exibe no console a lista de todos os servicos oferecidos pela oficina.
+     */
 public void listarServicos() {
         System.out.println("\n--- Catalogo de Servicos Oferecidos ---");
         if (this.listaServicos.isEmpty()) {
@@ -167,6 +183,11 @@ public void listarServicos() {
         System.out.println("---------------------------------------");
     }
 
+/**
+     * Busca um servico na lista pelo seu ID unico.
+     * @param idServico O ID do servico a ser procurado.
+     * @return O objeto {@code Servico} se encontrado, ou {@code null}.
+     */
 public Servico buscarServicoPorId(int idServico) {
         for (Servico servico : this.listaServicos) {
             if (servico.getIdServico() == idServico) {
@@ -177,13 +198,17 @@ public Servico buscarServicoPorId(int idServico) {
     }
 
 /**
- * Apenas exibe a lista de servicos. Nao permite edicao.
- * Para consulta por funcionarios.
- */
+     * Apenas exibe a lista de servicos. Nao permite edicao.
+     * Metodo destinado a consulta rapida por funcionarios.
+     */
 public void consultarCatalogoServicos(){
     listarServicos();
 }
 
+/**
+     * Gera um novo ID sequencial para um novo servico.
+     * @return O proximo ID inteiro disponivel.
+     */
    private int gerarProximoIdServico() {
         if (listaServicos.isEmpty()) {
             return 1;
@@ -194,6 +219,10 @@ public void consultarCatalogoServicos(){
                 .orElse(0) + 1;
     }
 
+   /**
+     * Persiste a lista atual de servicos no arquivo servicos.json.
+     * Apos salvar, marca que nao ha mais dados modificados pendentes.
+     */
     private void salvarServicos() {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         try (Writer writer = new FileWriter(ARQUIVO_SERVICOS_JSON)) {
@@ -204,6 +233,10 @@ public void consultarCatalogoServicos(){
         }
     }
 
+    /**
+     * Carrega a lista de servicos a partir do arquivo servicos.json.
+     * @return Uma {@code List<Servico>} com os dados carregados ou uma lista vazia.
+     */
     private List<Servico> carregarServicos() {
         try (Reader reader = new FileReader(ARQUIVO_SERVICOS_JSON)) {
             Gson gson = new Gson();

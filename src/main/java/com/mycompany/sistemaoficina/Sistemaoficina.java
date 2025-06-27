@@ -18,6 +18,8 @@ import java.util.Scanner;
 /**
  * Classe Principal do Sistema Oficina.
  * Responsavel por orquestrar as operacoes e gerenciar os diferentes gerenciadores de dados.
+ * Atua como o ponto central da aplicação, controlando os menus e o fluxo de trabalho.
+ * @author santo
  */
 public class Sistemaoficina {
 
@@ -61,6 +63,7 @@ public class Sistemaoficina {
 
     /**
      * Metodo principal para iniciar o sistema para um gerente logado.
+     * Exibe o menu com todas as permissoes administrativas.
      * @param gerenteLogado O objeto Gerente que fez login no sistema.
      */
     public void iniciar(Gerente gerenteLogado) { 
@@ -118,6 +121,7 @@ public class Sistemaoficina {
 
     /**
      * Metodo para iniciar o sistema com permissoes de funcionario.
+     * Exibe um menu com acesso limitado as funcionalidades operacionais.
      * @param funcionarioLogado O objeto Funcionario que fez login no sistema.
      */
     public void iniciarSomenteComPermissoesFuncionario(Funcionario funcionarioLogado) { 
@@ -161,6 +165,9 @@ public class Sistemaoficina {
         scanner.close();
     }
 
+    /**
+     * Exibe na tela as opções do menu principal para o perfil de Gerente
+     */
      private void exibirMenuPrincipal() {
         System.out.println("\n=== MENU PRINCIPAL (GERENTE) ===");
         System.out.println("1. Gerenciar Clientes");

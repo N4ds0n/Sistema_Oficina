@@ -2,6 +2,11 @@ package com.mycompany.sistemaoficina;
 
 import java.util.Objects;
 
+/**
+ * Classe que representa os Produtos que a oficina tem em estoque. 
+ * Ela também faz associação com a classe Fornecedor.
+ * @author santo
+ */
 public class Produto {
     
     private int idProduto;
@@ -43,7 +48,10 @@ public class Produto {
         }
     }
     
-    // Getters e Setters 
+    /**
+     * Getters e Setters.
+     * @return 
+     */
 
     public int getIdProduto() {
         return idProduto;
@@ -132,6 +140,11 @@ public class Produto {
         return false;
     }
     
+    /**
+     * Métodos Sobrescritos.
+     * Fornece uma representação Textual formatada dos Produtos.
+     * @return Uma String contendo os principais dados dos produtos.
+     */
     @Override
     public String toString() {
         return "Produto{" +
@@ -143,6 +156,11 @@ public class Produto {
                 '}';
     }
 
+    /**
+     * Compara dois produtos pelo seu ID unico.
+     * @param o O objeto a ser comparado.
+     * @return true se os IDs forem iguais, false caso contrario.
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -151,6 +169,10 @@ public class Produto {
         return idProduto == produto.idProduto;
     }
 
+    /**
+     * Gera um codigo hash para o Produto, basado no seu ID.
+     * @return O codigo hash do objeto.
+     */
     @Override
     public int hashCode() {
         return Objects.hash(idProduto);

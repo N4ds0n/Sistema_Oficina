@@ -11,8 +11,9 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- * Classe responsavel por gerenciar todas as operacoes relacionadas a Clientes.
+ *Classe responsavel por gerenciar todas as operacoes relacionadas a Clientes.
  * Inclui carregamento, salvamento e operacoes CRUD (Criar, Ler, Atualizar, Excluir).
+ * @author santo
  */
 public class GerenciadorClientes {
 
@@ -31,7 +32,7 @@ public class GerenciadorClientes {
     }
 
     /**
-     * Retorna a lista de clientes.
+     * Retorna a lista de clientes atualmente em memoria..
      * @return A lista de clientes em memoria.
      */
     public List<Clientes> getListaClientes() {
@@ -83,10 +84,9 @@ public class GerenciadorClientes {
     }
 
     /**
-     * Método para listar clientes com opçoes de ordenação
      * Apresenta um submenu para o usuario escolher como ordenar a lista de clientes
-     * antes de exibi-la.
-     * @param scanner Scanner para entrada de dados do usuario.
+     * antes de exibi-la. Utiliza as implementacoes de Comparable e Comparator da classe Clientes.
+     * @param scanner A instancia do Scanner para ler a entrada do usuario.
      */
      private void listarClientesComOrdenacao(Scanner scanner) {
         if (listaClientes.isEmpty()) {
@@ -129,8 +129,8 @@ public class GerenciadorClientes {
     
     
     /**
-     * Cadastra um novo cliente no sistema com confirmacao de salvamento.
-     * @param scanner Scanner para entrada de dados do usuario.
+     * Conduz o fluxo de trabalho para cadastrar um novo cliente no sistema.
+     * @param scanner A instancia do Scanner para ler a entrada do usuario.
      */
     private void cadastrarCliente(Scanner scanner) {
         // Gera o ID unico para o cliente
@@ -156,8 +156,8 @@ public class GerenciadorClientes {
     }
 
     /**
-     * Edita um cliente existente na lista.
-     * @param scanner O scanner para entrada do usuario.
+     * Conduz o fluxo de trabalho para editar os dados de um cliente existente.
+     * @param scanner A instancia do Scanner para ler a entrada do usuario.
      */
     private void editarCliente(Scanner scanner) {
         if (listaClientes.isEmpty()) {
@@ -182,8 +182,8 @@ public class GerenciadorClientes {
     }
 
     /**
-     * Exclui um cliente da lista.
-     * @param scanner O scanner para entrada do usuario.
+     * Conduz o fluxo de trabalho para excluir um cliente do sistema.
+     * @param scanner A instancia do Scanner para ler a entrada do usuario.
      */
     private void excluirCliente(Scanner scanner) {
         if (listaClientes.isEmpty()) {
@@ -214,7 +214,8 @@ public class GerenciadorClientes {
     }
 
     /**
-     * Exibe a lista de clientes cadastrados com seus respectivos IDs.
+     * Exibe no console uma lista simples de todos os clientes cadastrados.
+     * Este metodo e usado principalmente por outras funcoes que precisam mostrar os clientes disponiveis.
      */
     public void listarClientes() { // Metodo publico para ser chamado de fora
         if (listaClientes.isEmpty()) {
@@ -244,7 +245,8 @@ public class GerenciadorClientes {
 
     /**
      * Carrega a lista de clientes a partir do arquivo JSON.
-     * @return Uma lista de objetos Clientes.
+     * Se o arquivo nao for encontrado, inicializa uma lista vazia.
+     * @return Uma {@code List<Clientes>} com os dados carregados ou uma lista vazia.
      */
     private List<Clientes> carregarDadosClientes() {
         List<Clientes> clientes = new ArrayList<>();
@@ -265,7 +267,7 @@ public class GerenciadorClientes {
     }
 
     /**
-     * Salva a lista de clientes no arquivo JSON.
+     * Persiste a lista atual de clientes no arquivo clientes.json.
      */
     public void salvarDadosClientes() { // Metodo publico para ser chamado de fora
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(ARQUIVO_CLIENTES_JSON))) {

@@ -12,6 +12,7 @@ import java.util.Scanner;
  * Classe responsavel por gerenciar os elevadores da oficina.
  * Armazena e controla o estado dos 3 elevadores fixos do sistema,
  * com persistencia de dados em JSON.
+ * @author santo
  */
 public class GerenciadorElevadores {
 
@@ -28,18 +29,19 @@ public class GerenciadorElevadores {
     
     /**
      * Aloca o primeiro elevador disponivel de um TIPO especifico para um agendamento.
+     * Este metodo verifica tanto o tipo do elevador quanto o seu estado de ocupacao.
      * @param agendamento O agendamento que requer um elevador.
      * @param tipoBuscado O tipo de elevador desejado (ex: "Fixo" ou "Corriqueiro").
      * @return true se um elevador do tipo correto foi alocado, false caso contrario.
      */
     public boolean alocarElevadorPorTipo(Agendamento agendamento, String tipoBuscado) {
         for (Elevador elevador : elevadores) {
-            // CORRECAO: Usar contains() e mais robusto para evitar problemas de comparacao de texto.
+           // A condicao usa 'contains' para ser mais robusta e evitar problemas com espacos ou caracteres especiais
             if (elevador.getTipo().contains(tipoBuscado) && !elevador.isOcupado()) {
                 elevador.setOcupado(true);
                 agendamento.setElevadorAlocado(elevador);
                 System.out.println("SUCESSO: Elevador " + elevador.getNumero() + " (" + elevador.getTipo() + ") alocado.");
-                salvarDadosElevadores();
+                salvarDadosElevadores(); // Salva o estado imediatamente
                 return true;
             }
         }
@@ -65,7 +67,8 @@ public class GerenciadorElevadores {
     }
 
     /**
-     * Forca a liberacao de um elevador especifico pelo seu numero (uso administrativo).
+     * Forca a liberacao de um elevador especifico pelo seu numero.
+     * Este e um metodo administrativo para corrigir estados inconsistentes do sistema.
      * @param numeroElevador O numero do elevador a ser liberado.
      */
     public void forcarLiberacao(int numeroElevador) {
@@ -82,8 +85,8 @@ public class GerenciadorElevadores {
     }
 
     /**
-     * Menu para gerenciamento administrativo dos elevadores.
-     * @param scanner Scanner para entrada de dados do usuario.
+     * Exibe o menu para gerenciamento administrativo dos elevadores.
+     * @param scanner A instancia do Scanner para ler a entrada do usuario.
      */
     public void menuAdministrativoElevadores(Scanner scanner) {
         int opcao;
@@ -125,7 +128,7 @@ public class GerenciadorElevadores {
     }
 
     /**
-     * Lista o status atual de todos os elevadores na tela.
+     * Exibe no console o status atual de todos os elevadores.
      */
     public void listarElevadores() {
         System.out.println("\n=== STATUS DOS ELEVADORES ===");
@@ -139,10 +142,10 @@ public class GerenciadorElevadores {
         System.out.println("=============================");
     }
 
-    /**
+     /**
      * Busca um elevador no array pelo seu numero identificador.
      * @param numeroElevador O numero do elevador.
-     * @return O objeto Elevador se encontrado, caso contrario, null.
+     * @return O objeto {@code Elevador} se encontrado, ou {@code null} caso contrario.
      */
     public Elevador buscarElevadorPorNumero(int numeroElevador) {
         if (elevadores == null) return null;
@@ -154,8 +157,9 @@ public class GerenciadorElevadores {
         return null;
     }
 
-    /**
-     * Salva o estado atual do array de elevadores no arquivo JSON.
+   /**
+     * Persiste o estado atual do array de elevadores no arquivo JSON.
+     * Este metodo e chamado sempre que o estado de um elevador e modificado.
      */
     private void salvarDadosElevadores() {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
@@ -167,9 +171,9 @@ public class GerenciadorElevadores {
     }
 
     /**
-     * Carrega o estado dos elevadores do arquivo JSON.
-     * Se o arquivo nao existir, cria os elevadores padrao e o arquivo.
-     * @return Um array de Elevador com o estado carregado ou padrao.
+     * Carrega o estado dos elevadores a partir do arquivo JSON.
+     * Se o arquivo nao existir, chama o metodo para criar os elevadores padrao.
+     * @return Um array de {@code Elevador} com o estado carregado ou padrao.
      */
     private Elevador[] carregarDadosElevadores() {
         try (Reader reader = new FileReader(ARQUIVO_ELEVADORES_JSON)) {
@@ -189,9 +193,9 @@ public class GerenciadorElevadores {
         }
     }
     
-    /**
+   /**
      * Cria o array de elevadores com os valores padrao.
-     * Este metodo e chamado apenas na primeira execucao do programa ou se o arquivo JSON nao for encontrado.
+     * Este metodo e chamado apenas na primeira execucao ou se o arquivo JSON nao for encontrado.
      * @return Um array com os 3 elevadores padrao.
      */
     private Elevador[] criarElevadoresPadrao() {

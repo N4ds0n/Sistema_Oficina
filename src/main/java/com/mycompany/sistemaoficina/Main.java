@@ -2,7 +2,19 @@ package com.mycompany.sistemaoficina;
 
 import java.util.Scanner;
 
+/**
+ * Classe rprincipal que contém o ponto de entrada (metodo main) para a aplicação.
+ * É responsável por inicializar o sistema, gerenciar o fluxo de login,
+ * e direcionar o usuário para o menu apropriado (Gerente ou Funcionario).
+ * @author santo
+ */
 public class Main {
+    /**
+     * Ponto de entrada principal do programa.
+     * Este metodo cria uma instancia do sistema, verifica a necessidade de
+     * cadastro do primeiro gerente, processa o login e inicia a sessão do usuário.
+     * @param args Argumentos da linha de comando.
+     */
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 

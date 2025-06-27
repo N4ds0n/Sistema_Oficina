@@ -25,10 +25,13 @@ import java.util.stream.Collectors;
  * Classe responsavel por gerenciar todas as operacoes relacionadas a Agendamentos.
  * Atua como o "maestro" do fluxo de trabalho, orquestrando a criacao de agendamentos,
  * o inicio e fim dos servicos, e a interacao com os outros gerenciadores.
+ * @author santo
  */
 public class GerenciadorAgendamentos {
 
-    // --- ATRIBUTOS E CONSTANTES ---
+    /**
+     * Atributos e Constantes
+     */
     private List<Agendamento> listaAgendamentos;
     private static final String ARQUIVO_AGENDAMENTOS_JSON = "agendamentos.json";
     private final GerenciadorClientes gerenciadorClientes;
@@ -36,6 +39,9 @@ public class GerenciadorAgendamentos {
     private final GerenciadorElevadores gerenciadorElevadores;
     private final GerenciadorOrdensDeServico gerenciadorOS;
 
+    /**
+     * Adaptador para que a biblioteca Gson saiba como lidar com o tipo LocalDateTime
+     */
     private static final TypeAdapter<LocalDateTime> LOCAL_DATE_TIME_ADAPTER = new TypeAdapter<>() {
         private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
         @Override
@@ -51,7 +57,14 @@ public class GerenciadorAgendamentos {
         }
     };
 
-    // --- CONSTRUTOR ---
+    /**
+     * Construtor do GerenciadorAgendamentos.
+     * Utiliza injecao de dependencia para garantir que o sistema trabalhe com os mesmos dados.
+     * @param gerenciadorClientes Instancia principal do GerenciadorClientes.
+     * @param gerenciadorFuncionarios Instancia principal do GerenciadorFuncionarios.
+     * @param gerenciadorElevadores Instancia principal do GerenciadorElevadores.
+     * @param gerenciadorOS Instancia principal do GerenciadorOrdensDeServico.
+     */
     public GerenciadorAgendamentos(GerenciadorClientes gerenciadorClientes, GerenciadorFuncionarios gerenciadorFuncionarios, GerenciadorElevadores gerenciadorElevadores, GerenciadorOrdensDeServico gerenciadorOS) {
         this.gerenciadorClientes = gerenciadorClientes;
         this.gerenciadorFuncionarios = gerenciadorFuncionarios;
@@ -60,7 +73,10 @@ public class GerenciadorAgendamentos {
         this.listaAgendamentos = carregarDadosAgendamentos();
     }
 
-    // --- METODO PUBLICO PRINCIPAL (MENU) ---
+    /**
+     * Exibe o menu de operacoes de agendamento e servico para o usuario.
+     * @param scanner Scanner para ler a entrada do usuario.
+     */
     public void gerenciarAgendamentos(Scanner scanner) {
         int opcao;
         do {
@@ -98,8 +114,11 @@ public class GerenciadorAgendamentos {
         } while (opcao != 0);
     }
     
-    // --- METODOS PRIVADOS (FLUXO DE TRABALHO) ---
-    
+    /**
+     * Apresenta um submenu para o usuario escolher como ordenar a lista de agendamentos
+     * antes de exibi-la na tela.
+     * @param scanner A instancia do Scanner para ler a entrada do usuario.
+     */
      private void listarAgendamentosComOrdenacao(Scanner scanner) {
         if (listaAgendamentos.isEmpty()) {
             System.out.println("\nNenhum agendamento cadastrado para listar.");
@@ -144,6 +163,10 @@ public class GerenciadorAgendamentos {
         }
     }
 
+     /**
+     * Conduz o fluxo de trabalho para criar uma nova reserva de horario no sistema.
+     * @param scanner A instancia do Scanner para ler a entrada do usuario.
+     */
     private void realizarAgendamento(Scanner scanner) {
         if (gerenciadorClientes.getListaClientes().isEmpty()) {
             System.out.println("Nao ha clientes cadastrados para realizar um agendamento.");
@@ -191,6 +214,10 @@ public class GerenciadorAgendamentos {
         System.out.println("Agendamento criado e salvo com sucesso! ID: " + novoAgendamento.getIdAgendamento());
     }
 
+    /**
+     * Inicia o servico de um agendamento, alocando recursos e criando a Ordem de Servico.
+     * @param scanner A instancia do Scanner para ler a entrada do usuario.
+     */
     private void iniciarServico(Scanner scanner) {
         System.out.println("\n--- Iniciar Servico e Abrir OS ---");
         listarAgendamentos();
@@ -244,6 +271,10 @@ public class GerenciadorAgendamentos {
         }
     }
 
+    /**
+     * Finaliza um servico em andamento, liberando recursos e fechando a Ordem de Servico.
+     * @param scanner A instancia do Scanner para ler a entrada do usuario.
+     */
     private void finalizarServico(Scanner scanner) {
         System.out.println("\n--- Finalizar Servico e Fechar OS ---");
         listarAgendamentos();
@@ -280,8 +311,8 @@ public class GerenciadorAgendamentos {
     }
 
     /**
-     * Fluxo de trabalho para REGISTRAR A ENTREGA de um veiculo pronto
-     * e opcionalmente emitir a Nota Fiscal.
+     * Registra a entrega de um veiculo ao cliente e permite a emissao da Nota Fiscal.
+     * @param scanner A instancia do Scanner para ler a entrada do usuario.
      */
     private void registrarEntrega(Scanner scanner) {
         System.out.println("\n--- Registrar Entrega de Veiculo ---");
@@ -313,16 +344,22 @@ public class GerenciadorAgendamentos {
                     return;
                 }
                 
-                // Pergunta se o usuario deseja emitir a nota fiscal
+                /**
+                 * Pergunta se o usuario deseja emitir a Nota Fiscal dos Serviços prestados.
+                 */
                 System.out.print("Deseja emitir a Nota Fiscal para esta entrega? (S/N): ");
                 String resposta = scanner.nextLine();
                 
                 if (resposta.equalsIgnoreCase("S")) {
-                    // Chama a classe especialista para "imprimir" a nota no console
+                    /**
+                     * CHama a classe especialista para imprimir a nota no console
+                     */
                     GeradorNotaFiscal.emitirNotaFiscal(os);
                 }
 
-                // Finaliza o processo, mudando o status do agendamento
+                /**
+                 * Finaliza o processo mudando o status do agendamento.
+                 */
                 agendamento.setStatus("Entregue");
                 System.out.println("Status do agendamento ID " + id + " atualizado para: " + agendamento.getStatus());
                 salvarDadosAgendamentos(); // Salva a mudanca final do status
@@ -335,6 +372,10 @@ public class GerenciadorAgendamentos {
         }
     }
 
+    /**
+     * Cancela um agendamento que ainda nao foi iniciado, aplicando uma taxa de retencao.
+     * @param scanner A instancia do Scanner para ler a entrada do usuario.
+     */
     private void cancelarAgendamento(Scanner scanner) {
         listarAgendamentos();
         if (listaAgendamentos.isEmpty()) return;
@@ -366,6 +407,9 @@ public class GerenciadorAgendamentos {
         }
     }
 
+      /**
+     * Exibe a lista de todos os agendamentos cadastrados, sem uma ordem especifica.
+     */
     private void listarAgendamentos() {
         if (listaAgendamentos.isEmpty()) {
             System.out.println("\nNenhum agendamento cadastrado.");
@@ -377,6 +421,11 @@ public class GerenciadorAgendamentos {
         }
     }
 
+    /**
+     * Busca um agendamento na lista pelo seu ID unico.
+     * @param idAgendamento O ID do agendamento a ser procurado.
+     * @return O objeto {@code Agendamento} se encontrado, ou {@code null}.
+     */
     public Agendamento buscarAgendamentoPorId(int idAgendamento) {
         for (Agendamento a : listaAgendamentos) {
             if (a.getIdAgendamento() == idAgendamento) {
@@ -386,10 +435,18 @@ public class GerenciadorAgendamentos {
         return null;
     }
     
+    /**
+     * Retorna a lista completa de agendamentos.
+     * @return Uma {@code List} de objetos Agendamento.
+     */
     public List<Agendamento> getListaAgendamentos() {
         return this.listaAgendamentos;
     }
 
+     /**
+     * Gera um novo ID sequencial para um novo agendamento.
+     * @return O proximo ID inteiro disponivel.
+     */
     private int gerarProximoIdAgendamento() {
         if (listaAgendamentos == null || listaAgendamentos.isEmpty()) {
             return 1;
@@ -400,6 +457,9 @@ public class GerenciadorAgendamentos {
                 .orElse(0) + 1;
     }
 
+    /**
+     * Persiste a lista atual de agendamentos no arquivo agendamentos.json.
+     */
     public void salvarDadosAgendamentos() {
         try (Writer writer = new FileWriter(ARQUIVO_AGENDAMENTOS_JSON)) {
             Gson gson = new GsonBuilder()
@@ -412,6 +472,10 @@ public class GerenciadorAgendamentos {
         }
     }
 
+    /**
+     * Carrega a lista de agendamentos a partir do arquivo agendamentos.json.
+     * @return Uma {@code List<Agendamento>} com os dados carregados ou uma lista vazia.
+     */
     private List<Agendamento> carregarDadosAgendamentos() {
         try (Reader reader = new FileReader(ARQUIVO_AGENDAMENTOS_JSON)) {
             Gson gson = new GsonBuilder()

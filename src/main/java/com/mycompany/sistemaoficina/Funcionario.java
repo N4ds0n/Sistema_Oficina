@@ -8,6 +8,12 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Objects; 
 
+/**
+ * Classe que representa os Funcionarios da oficina.
+ * Esta é a classe base para todos os tipos de empregados.
+ * Contendo informações essenciais como ID, nome e credenciais de acesso.
+ * @author santo
+ */
 public class Funcionario {
 
     private int id; 
@@ -15,11 +21,20 @@ public class Funcionario {
     private String cpf; 
     private String senha; 
 
-    // Construtor padrão: Gera um ID único automaticamente. 
+    /**
+     * Construtor padrão.
+     */
     public Funcionario() {
     }
 
-    // Construtor para criar um novo funcionário 
+    /**
+     * Construtor completo para criar um novo funcionario com todos os dados
+     * Realiza uma limpeza basica (trim) nos campos de CPF e Senha
+     * @param id
+     * @param nome
+     * @param cpf
+     * @param senha 
+     */
     public Funcionario(int id, String nome, String cpf, String senha) {
         this.id = id;
         this.nome = nome;
@@ -27,7 +42,10 @@ public class Funcionario {
         this.senha = (senha != null) ? senha.trim() : null; 
     }
     
-    // --- Getters e Setters ---
+    /**
+     * Getters e Setters.
+     * @return 
+     */
     public int getId() {
         return id;
     }
@@ -58,7 +76,9 @@ public class Funcionario {
     }
 
     /**
-     * Salva o objeto Funcionario em um arquivo JSON dentro da pasta "data/funcionarios"..
+     * Salva o objeto Funcionario atual em um arquivo Json individual.
+     * O arquivo é nomeado com o ID do funcionario e guardado na pasta "'data/funcionarios".
+     * @throws IOException  se ocorrer um erro durante a escrita do arquivo
      */
     public void salvarComoJson() throws IOException {
         String dirPath = "data/funcionarios";
@@ -79,6 +99,10 @@ public class Funcionario {
         } 
     }
 
+    /**
+     * Fornece uma representação textual resumida do Funcionario.
+     * @return Uma String formatada com os principais dados do funcionario.
+     */
     @Override
     public String toString() {
         return "Funcionario{" +
@@ -88,7 +112,12 @@ public class Funcionario {
                 '}';
     }
 
-    // --- Métodos para comparação de objetos (essencial para listas) ---
+    /**
+     * Metodos para comparação de objetos.
+     * Compara dois objetos Funcionario para verificar a igualdade
+     * @param o O objeto a ser comparado.
+     * @return true se os IDs forem iguais, false caso contrario
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -98,6 +127,10 @@ public class Funcionario {
         return Objects.equals(id, that.id); 
     }
 
+    /**
+     * Gera um codigo hash para o Funcionario, baseado no seu ID.
+     * @return O codigo hash do objeto.
+     */
     @Override
     public int hashCode() {
         return Objects.hash(id); 

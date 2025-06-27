@@ -13,19 +13,20 @@ import java.time.format.DateTimeFormatter;
 public class GeradorNotaFiscal {
     
      /**
-     * Gera e imprime no console uma Nota Fiscal formatada.
+     * Gera e imprime no console uma Nota Fiscal formatada a  partir de uma Ordem de Serviço
+     * Este método static pode ser chamado de qualquer parte do sistema para "imprimir" a nota.
      * @param os A Ordem de Servico finalizada a partir da qual a nota sera gerada.
      */
     public static void emitirNotaFiscal(OrdemDeServico os) {
         // Formatter para exibir datas de forma legivel
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
 
-        // Cabecalho da Nota Fiscal
+        // Cabecalho da Nota Fiscal com informações da empresa.
         System.out.println("\n\n========================================================");
         System.out.println("                    NOTA FISCAL DE SERVICOS");
         System.out.println("========================================================");
         System.out.println("OFICINA MILHO VERDE AUTOMOTIVA");
-        System.out.println("CNPJ: 12.345.678/0001-99");
+        System.out.println("CNPJ: 12.345.678/**01-**");
         System.out.println("Rua das Flores, 123 - Milho Verde, MG");
         System.out.println("--------------------------------------------------------");
         
@@ -35,7 +36,7 @@ public class GeradorNotaFiscal {
         System.out.println("Data de Emissao: " + os.getDataEmissao().format(formatter));
         System.out.println("--------------------------------------------------------");
 
-        // Dados do Cliente
+        // Dados do Cliente, obtidos da Ordem de Serviço.
         System.out.println("CLIENTE:");
         System.out.println("  Nome: " + os.getNomeCliente());
         System.out.println("  Veiculo: " + os.getModeloVeiculo());
@@ -46,7 +47,7 @@ public class GeradorNotaFiscal {
         System.out.println("DESCRICAO DOS ITENS");
         System.out.println("--------------------------------------------------------");
         
-        // Lista de Servicos
+        // Exibe a lista de Servicos realizados e os imprime de forma alinhada.
         if (!os.getServicosRealizados().isEmpty()) {
             System.out.println("SERVICOS PRESTADOS:");
             for (Servico servico : os.getServicosRealizados()) {
@@ -57,7 +58,7 @@ public class GeradorNotaFiscal {
             }
         }
         
-        // Lista de Pecas
+        // Exibe a ista de Pecas utilizadas e as imprime de forma alinhada.
         if (!os.getPecasUtilizadas().isEmpty()) {
             System.out.println("\nPECAS UTILIZADAS:");
             for (Produto peca : os.getPecasUtilizadas()) {
@@ -69,7 +70,7 @@ public class GeradorNotaFiscal {
         
         System.out.println("========================================================");
         
-        // Totalizador
+        // Totalizador da nota, alinhado a direita.
         String valorTotalFormatado = String.format("R$ %.2f", os.getValorTotal());
         System.out.printf("VALOR TOTAL %38s%n", valorTotalFormatado);
         

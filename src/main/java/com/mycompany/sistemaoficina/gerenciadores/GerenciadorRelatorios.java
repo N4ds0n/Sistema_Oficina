@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
 
 /**
  *Responsavel por gerar relatorios financeiros e de vendas com base nos dados de outros gerenciadores.
+ * Esta classe não armazena dados proprios, atuando como um serviço de processamento e exibição de informações.
  * @author santo
  */
 public class GerenciadorRelatorios {
@@ -31,7 +32,10 @@ public class GerenciadorRelatorios {
         this.gerenciadorDespesas = gd;
     }    
     
-    // Método Principal (MENU)
+    /**
+     * Exibe o menu principal para ageração  de relatorios e balanços financeiros.
+     * @param scanner A instancia do Scanner para ler a entrada do usuário.
+     */
      public void menuRelatorios(Scanner scanner) {
         int opcao;
         do {
@@ -68,7 +72,8 @@ public class GerenciadorRelatorios {
     }
     
      /**
-      * Métodos de Geração de Relatórios
+      * Gera e exibe um relatorio de todas as Ordens de Serviço finalizadas em um dia especifico.
+      * @param scanner 
       */
     private void relatorioVendasDiario(Scanner scanner) {
         System.out.print("\nDigite a data para o relatorio (formato dd/MM/yyyy): ");
@@ -107,6 +112,10 @@ public class GerenciadorRelatorios {
         }
     }
   
+    /**
+     * Gera e exibe um relarorio consolidado de todas as Ordens de Serviço dinalizadas em um mes e ano especificos.
+     * @param scanner A instancia do Scanner para ler a entrada do usuario.
+     */
     private void relatorioVendasMensal(Scanner scanner) {
         System.out.print("\nDigite o mes e ano para o relatorio (formato MM/yyyy): ");
         String mesAnoStr = scanner.nextLine();
@@ -137,6 +146,11 @@ public class GerenciadorRelatorios {
         }
     }
     
+    /**
+     * Gera e exibe um balanço financeiro completo de um mes e ano especificos.
+     * Calcula o total de receitas, o total de despecas e o resultado final(lucro ou prejuízo).
+     * @param scanner 
+     */
     private void balancoMensal(Scanner scanner) {
         System.out.print("\nDigite o mes e ano para o balanco (formato MM/yyyy): ");
         String mesAnoStr = scanner.nextLine();

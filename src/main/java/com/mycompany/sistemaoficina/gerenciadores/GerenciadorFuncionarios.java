@@ -1,10 +1,10 @@
-package com.mycompany.sistemaoficina.gerenciadores; // Ajuste o pacote conforme sua estrutura
+package com.mycompany.sistemaoficina.gerenciadores; 
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
-import com.mycompany.sistemaoficina.AuthService; // Importar AuthService
-import com.mycompany.sistemaoficina.Funcionario; // Importar Funcionario
+import com.mycompany.sistemaoficina.AuthService; 
+import com.mycompany.sistemaoficina.Funcionario; 
 
 import java.io.*;
 import java.util.ArrayList;
@@ -14,6 +14,7 @@ import java.util.Scanner;
 /**
  * Classe responsavel por gerenciar todas as operacoes relacionadas a Funcionarios.
  * Inclui carregamento, salvamento e operacoes CRUD (Criar, Ler, Atualizar, Excluir).
+ * @author santo
  */
 public class GerenciadorFuncionarios {
 
@@ -40,8 +41,8 @@ public class GerenciadorFuncionarios {
     }
 
     /**
-     * Submenu para gerenciar funcionarios (cadastro, edicao, exclusao, listagem).
-     * Este metodo agora pertence ao GerenciadorFuncionarios.
+     * Exibe o submenu para gerenciar os funcionarios, permitindo o acesso
+     * as funcionalidades de cadastro, edicao, exclusao e listagem.
      */
     public void gerenciarFuncionarios() { // Metodo publico para ser chamado pela SistemaOficina
         Scanner scanner = new Scanner(System.in);
@@ -80,8 +81,9 @@ public class GerenciadorFuncionarios {
     }
 
     /**
-     * Cadastra um novo funcionario no sistema com confirmacao de salvamento.
-     * @param scanner Scanner para entrada de dados do usuario.
+     * Conduz o fluxo de trabalho para cadastrar um novo funcionario no sistema.
+     * Pede ao usuario os dados, gera um ID unico e pergunta se deseja salvar.
+     * @param scanner A instancia do Scanner para ler a entrada do usuario.
      */
     private void cadastrarFuncionario(Scanner scanner) {
         System.out.print("Nome: ");
@@ -91,8 +93,7 @@ public class GerenciadorFuncionarios {
         System.out.print("Senha: ");
         String senha = scanner.nextLine().trim();
         
-        // Gera o ID unico antes de criar o objeto Funcionario
-        // Passa a lista atual de funcionarios para o AuthService gerar o ID
+        // Delega a geracao do ID para o AuthService para manter a logica centralizada.
         int novoId = AuthService.gerarIdUnicoFuncionario(this.listaFuncionarios); 
         
         Funcionario novoFunc = new Funcionario(novoId, nome, cpf, senha); 
@@ -112,8 +113,8 @@ public class GerenciadorFuncionarios {
     }
 
     /**
-     * Edita um funcionario existente na lista.
-     * @param scanner O scanner para entrada do usuario.
+     * Conduz o fluxo de trabalho para editar um funcionario existente.
+     * @param scanner A instancia do Scanner para ler a entrada do usuario.
      */
     private void editarFuncionario(Scanner scanner) {
         if (listaFuncionarios.isEmpty()) {
@@ -157,9 +158,9 @@ public class GerenciadorFuncionarios {
         System.out.println("Funcionario editado com sucesso e salvo no arquivo!");
     }
 
-    /**
-     * Exclui um funcionario da lista.
-     * @param scanner O scanner para entrada do usuario.
+     /**
+     * Conduz o fluxo de trabalho para excluir um funcionario do sistema.
+     * @param scanner A instancia do Scanner para ler a entrada do usuario.
      */
     private void excluirFuncionario(Scanner scanner) {
         if (listaFuncionarios.isEmpty()) {
@@ -195,7 +196,7 @@ public class GerenciadorFuncionarios {
     /**
      * Exibe a lista de funcionarios cadastrados com seus respectivos IDs.
      */
-    public void listarFuncionarios() { // Metodo publico para ser chamado de fora
+    public void listarFuncionarios() { 
         if (listaFuncionarios.isEmpty()) {
             System.out.println("Nenhum funcionario cadastrado.");
             return;
@@ -208,9 +209,9 @@ public class GerenciadorFuncionarios {
     }
 
     /**
-     * Busca um funcionario na lista pelo seu ID.
-     * @param idFuncionario O ID do funcionario a ser buscado.
-     * @return O objeto Funcionario se encontrado, ou null caso contrario.
+     * Busca um funcionario na lista em memoria pelo seu ID unico.
+     * @param idFuncionario O ID do funcionario a ser procurado.
+     * @return O objeto {@code Funcionario} se encontrado, ou {@code null}.
      */
     public Funcionario buscarFuncionarioPorId(int idFuncionario) { // Metodo publico para ser chamado de fora
         for (Funcionario f : listaFuncionarios) {
@@ -223,7 +224,7 @@ public class GerenciadorFuncionarios {
 
     /**
      * Carrega a lista de funcionarios a partir do arquivo JSON.
-     * @return Uma lista de objetos Funcionario.
+     * @return Uma {@code List<Funcionario>} com os dados carregados ou uma lista vazia.
      */
     private List<Funcionario> carregarDadosFuncionarios() {
         List<Funcionario> funcionarios = new ArrayList<>();
@@ -244,9 +245,9 @@ public class GerenciadorFuncionarios {
     }
 
     /**
-     * Salva a lista de funcionarios no arquivo JSON.
+     * Persiste a lista atual de funcionarios no arquivo funcionarios.json.
      */
-    public void salvarDadosFuncionarios() { // Metodo publico para ser chamado de fora
+    public void salvarDadosFuncionarios() { 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(ARQUIVO_FUNCIONARIOS_JSON))) {
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
             gson.toJson(listaFuncionarios, writer);

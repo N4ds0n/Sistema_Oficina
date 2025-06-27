@@ -24,7 +24,9 @@ public class GerenciadorDespesas {
     private List<Despesa> listaDespesas;
     private static final String ARQUIVO_DESPESAS_JSON = "despesas.json";
 
-    // Adaptador para que a biblioteca Gson saiba como lidar com LocalDateTime.
+    /**
+     * Adaptador para que a biblioteca Gson saiba como lidar com LocalDateTime.
+     */
     private static final TypeAdapter<LocalDateTime> LOCAL_DATE_TIME_ADAPTER = new TypeAdapter<>() {
         private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
         @Override
@@ -61,7 +63,9 @@ public List<Despesa> getListaDespesas() {
     }
     
     /**
-     * Método Principal MENU
+     * Exibe o menu principal para a gestao de despesas.
+     * Permite ao usuario lancar uma nova despesa ou listar todas as existentes.
+     * @param scanner A instancia do Scanner para ler a entrada do usuario.
      */
     public void gerenciarDespesas(Scanner scanner) {
         int opcao;
@@ -95,7 +99,9 @@ public List<Despesa> getListaDespesas() {
     }
     
     /**
-     * Métodos de Fluxo de Trabalho
+     * Conduz o fluxo de trabalho para registar uma nova despesa.
+     * Pede ao usuario os detalhes da despesa e a salva no sistema.
+     * @param scanner A instancia do Scanner para ler a entrada do usuario.
      */
     private void lancarNovaDespesa(Scanner scanner) {
         System.out.println("\n--- Lancar Nova Despesa ---");
@@ -122,6 +128,9 @@ public List<Despesa> getListaDespesas() {
         }
     }
     
+    /**
+      * Exibe no console uma lista formatada de todas as despesas registradas.
+      */
      private void listarDespesas() {
         System.out.println("\n--- LISTA DE DESPESAS LANCADAS ---");
         if (this.listaDespesas.isEmpty()) {
@@ -135,7 +144,8 @@ public List<Despesa> getListaDespesas() {
     }
      
      /**
-      * Métodos Auxiliares e de Persistencia
+      * Gera um novo ID sequencial para uma nova despesa.
+      * @return O proximo ID inteiro disponivel.
       */
      private int gerarProximoIdDespesa() {
         if (listaDespesas.isEmpty()) {
@@ -147,6 +157,9 @@ public List<Despesa> getListaDespesas() {
                 .orElse(0) + 1;
     }
      
+   /**
+    * Persiste a lista atual de despesas no arquivo despesas.json.
+    */
    private void salvarDadosDespesas() {
         Gson gson = new GsonBuilder()
                 .setPrettyPrinting()
@@ -159,6 +172,11 @@ public List<Despesa> getListaDespesas() {
         }
     }
    
+   /**
+     * Carrega a lista de despesas a partir do arquivo despesas.json.
+     * Se o arquivo nao for encontrado, inicializa uma lista vazia.
+     * @return Uma {@code List<Despesa>} com os dados carregados ou uma lista vazia.
+     */
    private List<Despesa> carregarDadosDespesas() {
         try (Reader reader = new FileReader(ARQUIVO_DESPESAS_JSON)) {
             Gson gson = new GsonBuilder()

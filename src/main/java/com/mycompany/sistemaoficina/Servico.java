@@ -4,7 +4,8 @@ package com.mycompany.sistemaoficina;
 import java.util.Objects;
 
 /**
- * Classe que representa um serviço a ser oferecido pela oficina, como ""Troca de Oleo" ou Alinhamento.
+ * Classe que representa um serviço a ser oferecido pela oficina, como "Troca de Oleo" ou Alinhamento".
+ * Funciona como um item no catalofo de serviços da empresa.
  * @author santo
  */
 public class Servico {
@@ -31,7 +32,10 @@ public class Servico {
         this.valor = valor;
     }
     
-    // Getters e Setters
+    /**
+     * Getters e Setters
+     * @return 
+     */
     public int getIdServico() {
         return idServico;
     }
@@ -56,8 +60,11 @@ public class Servico {
         this.valor = valor;
     }
 
-    // Metodos Sobrescritos
-
+    /**
+     * Métodos Sobrescritos.
+     * Fornece uma representação Textual formatada do Serviço.
+     * @return Uma String contendo os principais dados do serviço.
+     */
     @Override
     public String toString() {
         return "Servico{" +
@@ -67,6 +74,11 @@ public class Servico {
                 '}';
     }
 
+    /**
+     * Compara dois Serviços pelo seu ID unico.
+     * @param o O objeto a ser comparado.
+     * @return  true se os IDs forem iguais, false caso contrario
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -75,6 +87,10 @@ public class Servico {
         return idServico == servico.idServico;
     }
 
+    /**
+     * Gera um codigo hash para o Servico, baseado no seu ID
+     * @return O codigo hash do objeto.
+     */
     @Override
     public int hashCode() {
         return Objects.hash(idServico);

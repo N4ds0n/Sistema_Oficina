@@ -19,9 +19,9 @@ public class GerenciadorFornecedores {
     private final List<Fornecedor> listaFornecedores;
     private static final String ARQUIVO_FORNECEDORES_JSON = "fornecedores.json";
 
-    /**
-     * Construtor. Carrega os fornecedores do arquivo JSON ao iniciar.
-     */
+   /**
+    * Construtor. Carrega os fornecedores do arquivo JSON ao iniciar.
+    */
     public GerenciadorFornecedores() {
         this.listaFornecedores = carregarFornecedores();
     }
@@ -34,8 +34,11 @@ public class GerenciadorFornecedores {
         return this.listaFornecedores;
     }
     
-    // METODO PUBLICO PRINCIPAL (MENU) 
-    
+    /**
+     * Exibe o menu principal para a gestao de fornecedores e processa a escolha do usuario.
+     * Permite o acesso as funcionalidades de cadastro, listagem e edicao.
+     * @param scanner A instancia do Scanner para ler a entrada do usuario.
+     */
     public void gerenciarFornecedores(Scanner scanner) {
         int opcao;
         do {
@@ -71,8 +74,12 @@ public class GerenciadorFornecedores {
         } while (opcao != 0);
     }
 
-    //METODOS DE FLUXO DE TRABALHO
-
+    /**
+     * Conduz o fluxo de trabalho para cadastrar um novo fornecedor.
+     * Pede ao usuario os dados necessarios, cria o objeto Fornecedor e o adiciona a lista,
+     * persistindo as alteracoes no final.
+     * @param scanner A instancia do Scanner para ler a entrada do usuario.
+     */
     private void cadastrarNovoFornecedor(Scanner scanner) {
         System.out.println("\n--- Cadastrar Novo Fornecedor ---");
         try {
@@ -98,6 +105,11 @@ public class GerenciadorFornecedores {
         }
     }
 
+    /**
+     * Conduz o fluxo de trabalho para editar os dados de um fornecedor existente.
+     * Permite que o usuario altere os campos do fornecedor, deixando em branco para manter o valor atual.
+     * @param scanner A instancia do Scanner para ler a entrada do usuario.
+     */
     private void editarFornecedor(Scanner scanner) {
         System.out.println("\n--- Editar Fornecedor ---");
         listarFornecedores();
@@ -141,8 +153,10 @@ public class GerenciadorFornecedores {
         }
     }
     
-    // METODOS AUXILIARES E DE PERSISTENCIA 
-
+    /**
+     * Exibe no console a lista de todos os fornecedores cadastrados.
+     * Apresenta o ID e o nome fantasia de cada um para facil identificacao.
+     */
     public void listarFornecedores() {
         System.out.println("\n--- Lista de Fornecedores ---");
         if (this.listaFornecedores.isEmpty()) {
@@ -155,6 +169,11 @@ public class GerenciadorFornecedores {
         System.out.println("-----------------------------");
     }
 
+    /**
+     * Busca um fornecedor na lista em memoria pelo seu ID unico.
+     * @param idFornecedor O ID do fornecedor a ser procurado.
+     * @return O objeto {@code Fornecedor} se encontrado, ou {@code null} caso contrario.
+     */
     public Fornecedor buscarFornecedorPorId(int idFornecedor) {
         for (Fornecedor fornecedor : this.listaFornecedores) {
             if (fornecedor.getIdFornecedor() == idFornecedor) {
@@ -164,6 +183,11 @@ public class GerenciadorFornecedores {
         return null;
     }
 
+    /**
+     * Gera um novo ID sequencial para um novo fornecedor.
+     * O ID e baseado no maior ID existente na lista, incrementado de 1.
+     * @return O proximo ID inteiro disponivel.
+     */
     private int gerarProximoIdFornecedor() {
         if (listaFornecedores.isEmpty()) {
             return 1;
@@ -174,6 +198,10 @@ public class GerenciadorFornecedores {
                 .orElse(0) + 1;
     }
 
+    /**
+     * Persiste a lista atual de fornecedores no arquivo fornecedores.json.
+     * Utiliza a biblioteca Gson para serializar a lista de objetos.
+     */
     private void salvarFornecedores() {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         try (Writer writer = new FileWriter(ARQUIVO_FORNECEDORES_JSON)) {
@@ -183,6 +211,11 @@ public class GerenciadorFornecedores {
         }
     }
 
+    /**
+     * Carrega a lista de fornecedores a partir do arquivo fornecedores.json.
+     * Se o arquivo nao for encontrado, inicializa uma lista vazia.
+     * @return Uma {@code List<Fornecedor>} com os dados carregados ou uma lista vazia.
+     */
     private List<Fornecedor> carregarFornecedores() {
         try (Reader reader = new FileReader(ARQUIVO_FORNECEDORES_JSON)) {
             List<Fornecedor> fornecedores = new Gson().fromJson(reader, new TypeToken<List<Fornecedor>>(){}.getType());
