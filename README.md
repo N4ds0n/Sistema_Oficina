@@ -1,6 +1,6 @@
 # 🔧 Sistema de Gestão para Oficina Mecânica
 
-Este projeto é um sistema completo de gestão para uma oficina mecânica localizada em Milho Verde, desenvolvido em Java como parte de um trabalho prático integrador (TPI). O sistema gerencia **agendamentos de serviços**, **cadastros de clientes e funcionários**, **controle de estoque e vendas**, **despesas da oficina**, **elevadores**, **ordens de serviço** e **relatórios financeiros**.
+Este projeto é um sistema completo de gestão para uma oficina mecânica, desenvolvido em Java como parte de um trabalho prático da disciplina de Programação Orientada a Objetos (POO). O sistema gerencia **agendamentos de serviços**, **cadastros de clientes e funcionários**, **controle de estoque e vendas**, **despesas da oficina**, **elevadores**, **ordens de serviço** e **relatórios financeiros**.
 
 ## 🚀 Funcionalidades
 
