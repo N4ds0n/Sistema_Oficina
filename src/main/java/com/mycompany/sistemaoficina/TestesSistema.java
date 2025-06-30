@@ -23,9 +23,12 @@ public class TestesSistema {
      * @param args Argumentos da linha de comando (nao utilizados).
      */
     public static void main(String[] args) {
-        // --- PREPARACAO DO AMBIENTE DE TESTE ---
-        // Este passo demonstra o Requisito 13: Salvar e recuperar todas as informacoes.
-        // Ao instanciar os gerenciadores, eles automaticamente carregam os dados dos ficheiros JSON.
+       
+        /**
+         * --- PREPARACAO DO AMBIENTE DE TESTE ---
+        *Este passo demonstra o Requisito 13: Salvar e recuperar todas as informacoes.
+        *Ao instanciar os gerenciadores, eles automaticamente carregam os dados dos ficheiros JSON.
+         */
         System.out.println("--- INICIANDO AMBIENTE DE TESTE E CARREGANDO DADOS ---");
         GerenciadorClientes gerenciadorClientes = new GerenciadorClientes();
         GerenciadorFuncionarios gerenciadorFuncionarios = new GerenciadorFuncionarios();
