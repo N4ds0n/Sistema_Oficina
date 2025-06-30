@@ -14,13 +14,13 @@ import java.util.Objects;
  */
 public class OrdemDeServico {
 
-    private int idOrdemDeServico;
-    private int idAgendamento;
-    private String nomeCliente;
-    private String modeloVeiculo;
-    private String placaVeiculo;
-    private List<Servico> servicosRealizados;
-    private List<Produto> pecasUtilizadas;
+    private final int idOrdemDeServico;
+    private final int idAgendamento;
+    private final String nomeCliente;
+    private final String modeloVeiculo;
+    private final String placaVeiculo;
+    private final List<Servico> servicosRealizados;
+    private final List<Produto> pecasUtilizadas;
     private double valorTotal;
     private LocalDateTime dataEmissao;
     private String status;
@@ -98,42 +98,83 @@ public class OrdemDeServico {
 
     // Getters 
 
+    /**
+     *
+     * @return
+     */
+
     public int getIdOrdemDeServico() {
         return idOrdemDeServico;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getIdAgendamento() {
         return idAgendamento;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getNomeCliente() {
         return nomeCliente;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getModeloVeiculo() {
         return modeloVeiculo;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getPlacaVeiculo() {
         return placaVeiculo;
     }
     
+    /**
+     *
+     * @return
+     */
     public List<Servico> getServicosRealizados() {
         return servicosRealizados;
     }
 
+    /**
+     *
+     * @return
+     */
     public List<Produto> getPecasUtilizadas() {
         return pecasUtilizadas;
     }
 
+    /**
+     *
+     * @return
+     */
     public double getValorTotal() {
         return valorTotal;
     }
 
+    /**
+     *
+     * @return
+     */
     public LocalDateTime getDataEmissao() {
         return dataEmissao;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getStatus() {
         return status;
     }

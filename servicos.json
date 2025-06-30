@@ -38,5 +38,10 @@
     "idServico": 8,
     "descricao": "Troca de Filtro de Ar",
     "valor": 50.0
+  },
+  {
+    "idServico": 9,
+    "descricao": "Troca de Oleo",
+    "valor": 50.0
   }
 ]

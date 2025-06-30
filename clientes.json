@@ -46,5 +46,101 @@
         "ano": 2010
       }
     ]
+  },
+  {
+    "id": 4,
+    "nome": "Peter Parker",
+    "endereco": "rua das teias",
+    "telefone": "882228822",
+    "email": "aranha@gmail",
+    "cpfAnonimizado": "1921821982",
+    "veiculos": [
+      {
+        "modelo": "Aranha Movel",
+        "placa": "SPI-0909",
+        "cor": "vermelho",
+        "ano": 2010
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "nome": "Bruce Wayne",
+    "endereco": "Mansao Wayne",
+    "telefone": "28282822",
+    "email": "batmail@gmail",
+    "cpfAnonimizado": "28281928198",
+    "veiculos": [
+      {
+        "modelo": "BatMovel",
+        "placa": "BAT-0000",
+        "cor": "preto",
+        "ano": 2025
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "nome": "Ayrton Senna",
+    "endereco": "rua das McLarens",
+    "telefone": "28281821",
+    "email": "Formula@gmail",
+    "cpfAnonimizado": "929812982",
+    "veiculos": [
+      {
+        "modelo": "Honda NSX Type R",
+        "placa": "HOD-8767",
+        "cor": "vermelho",
+        "ano": 2004
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "nome": "Meire Rodrigues",
+    "endereco": "rua das flores",
+    "telefone": "339877674",
+    "email": "meire@gmail",
+    "cpfAnonimizado": "8271827",
+    "veiculos": [
+      {
+        "modelo": "Honda City",
+        "placa": "CIT-8765",
+        "cor": "prata",
+        "ano": 2016
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "nome": "Getúlio Rodrigues",
+    "endereco": "rua primavera",
+    "telefone": "22987873",
+    "email": "getulio@gmail",
+    "cpfAnonimizado": "27127187",
+    "veiculos": [
+      {
+        "modelo": "Ford Fiesta",
+        "placa": "FIE-9809",
+        "cor": "prata",
+        "ano": 2006
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "nome": "Jaime",
+    "endereco": "Rua Juscelino",
+    "telefone": "229939393",
+    "email": "Jaime@outlook",
+    "cpfAnonimizado": "12112123",
+    "veiculos": [
+      {
+        "modelo": "Ford KA",
+        "placa": "FKA-2718",
+        "cor": "azul",
+        "ano": 2004
+      }
+    ]
   }
 ]

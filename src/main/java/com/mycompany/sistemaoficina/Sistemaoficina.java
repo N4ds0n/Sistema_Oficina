@@ -77,7 +77,7 @@ public class Sistemaoficina {
 
             switch (opcao) {
                  case 1:
-                    gerenciadorClientes.gerenciarClientes();
+                    gerenciadorClientes.exibirMenu();
                     break;
                 case 2:
                     gerenciadorAgendamentos.gerenciarAgendamentos(scanner);
@@ -141,7 +141,7 @@ public class Sistemaoficina {
 
             switch (opcao) {
                 case 1:
-                    gerenciadorClientes.gerenciarClientes(); 
+                    gerenciadorClientes.exibirMenu(); 
                     break;
                 case 2:
                     gerenciadorAgendamentos.gerenciarAgendamentos(scanner); 

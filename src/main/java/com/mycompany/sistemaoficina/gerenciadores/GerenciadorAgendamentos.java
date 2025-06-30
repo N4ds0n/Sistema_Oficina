@@ -183,7 +183,7 @@ public class GerenciadorAgendamentos {
             System.out.println("O cliente selecionado nao possui veiculos cadastrados.");
             return;
         }
-        clienteSelecionado.listarVeiculos();
+        gerenciadorClientes.exibirVeiculosDoCliente(clienteSelecionado);
         System.out.print("Digite o INDICE do veiculo do cliente para o agendamento: ");
         int indexVeiculo = Integer.parseInt(scanner.nextLine());
 

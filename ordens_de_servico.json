@@ -100,5 +100,126 @@
     "valorTotal": 0.0,
     "dataEmissao": "30/06/2025 13:02",
     "status": "Aberta"
+  },
+  {
+    "idOrdemDeServico": 6,
+    "idAgendamento": 99,
+    "nomeCliente": "Ernesto N. Silva",
+    "modeloVeiculo": "Ford KA",
+    "placaVeiculo": "FOK-0808",
+    "servicosRealizados": [],
+    "pecasUtilizadas": [],
+    "valorTotal": 0.0,
+    "dataEmissao": "30/06/2025 15:22",
+    "status": "Aberta"
+  },
+  {
+    "idOrdemDeServico": 7,
+    "idAgendamento": 4,
+    "nomeCliente": "Bruce Wayne",
+    "modeloVeiculo": "BatMovel",
+    "placaVeiculo": "BAT-0000",
+    "servicosRealizados": [
+      {
+        "idServico": 7,
+        "descricao": "Revisao Completa",
+        "valor": 600.0
+      }
+    ],
+    "pecasUtilizadas": [
+      {
+        "idProduto": 2,
+        "nome": "Pneu",
+        "descricao": "Pneu é um Pneu uai",
+        "precoCusto": 300.0,
+        "precoVenda": 350.0,
+        "quantidadeEstoque": 9,
+        "idFornecedor": 1,
+        "nomeFornecedor": "Steve Rogers"
+      }
+    ],
+    "valorTotal": 950.0,
+    "dataEmissao": "30/06/2025 15:35",
+    "status": "Aberta"
+  },
+  {
+    "idOrdemDeServico": 8,
+    "idAgendamento": 5,
+    "nomeCliente": "Getúlio Rodrigues",
+    "modeloVeiculo": "Ford Fiesta",
+    "placaVeiculo": "FIE-9809",
+    "servicosRealizados": [
+      {
+        "idServico": 4,
+        "descricao": "Troca de Pastilhas de Freio",
+        "valor": 150.0
+      }
+    ],
+    "pecasUtilizadas": [
+      {
+        "idProduto": 4,
+        "nome": "Oleo para motor",
+        "descricao": "Oleo para motor",
+        "precoCusto": 30.0,
+        "precoVenda": 35.0,
+        "quantidadeEstoque": 4,
+        "idFornecedor": 1,
+        "nomeFornecedor": "Steve Rogers"
+      }
+    ],
+    "valorTotal": 185.0,
+    "dataEmissao": "30/06/2025 17:16",
+    "status": "Finalizada"
+  },
+  {
+    "idOrdemDeServico": 9,
+    "idAgendamento": 6,
+    "nomeCliente": "Jaime",
+    "modeloVeiculo": "Ford KA",
+    "placaVeiculo": "FKA-2718",
+    "servicosRealizados": [
+      {
+        "idServico": 4,
+        "descricao": "Troca de Pastilhas de Freio",
+        "valor": 150.0
+      }
+    ],
+    "pecasUtilizadas": [
+      {
+        "idProduto": 2,
+        "nome": "Pneu",
+        "descricao": "Pneu é um Pneu uai",
+        "precoCusto": 300.0,
+        "precoVenda": 350.0,
+        "quantidadeEstoque": 8,
+        "idFornecedor": 1,
+        "nomeFornecedor": "Steve Rogers"
+      },
+      {
+        "idProduto": 3,
+        "nome": "Pastilhas de Freio",
+        "descricao": "Elementos de desgaste que garantem a frenagem eficiente ao pressionar os discos de freio.",
+        "precoCusto": 40.0,
+        "precoVenda": 50.0,
+        "quantidadeEstoque": 14,
+        "idFornecedor": 1,
+        "nomeFornecedor": "Steve Rogers"
+      }
+    ],
+    "valorTotal": 550.0,
+    "dataEmissao": "30/06/2025 17:16",
+    "status": "Finalizada"
+  },
+  {
+    "idOrdemDeServico": 10,
+    "idAgendamento": 99,
+    "nomeCliente": "Ernesto N. Silva",
+    "modeloVeiculo": "Ford KA",
+    "placaVeiculo": "FOK-0808",
+    "servicosRealizados": [],
+    "pecasUtilizadas": [],
+    "valorTotal": 0.0,
+    "dataEmissao": "30/06/2025 17:34",
+    "status": "Aberta"
   }
 ]

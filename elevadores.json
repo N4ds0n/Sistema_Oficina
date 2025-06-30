@@ -7,7 +7,7 @@
   {
     "numero": 2,
     "tipo": "Corriqueiro",
-    "ocupado": false
+    "ocupado": true
   },
   {
     "numero": 3,

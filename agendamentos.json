@@ -85,5 +85,92 @@
     "descricaoProblema": "Manutencao geral",
     "status": "Entregue",
     "valorRetidoCancelamento": 0.0
+  },
+  {
+    "idAgendamento": 4,
+    "cliente": {
+      "id": 5,
+      "nome": "Bruce Wayne",
+      "endereco": "Mansao Wayne",
+      "telefone": "28282822",
+      "email": "batmail@gmail",
+      "cpfAnonimizado": "28281928198",
+      "veiculos": [
+        {
+          "modelo": "BatMovel",
+          "placa": "BAT-0000",
+          "cor": "preto",
+          "ano": 2025
+        }
+      ]
+    },
+    "veiculo": {
+      "modelo": "BatMovel",
+      "placa": "BAT-0000",
+      "cor": "preto",
+      "ano": 2025
+    },
+    "dataHora": "10/07/2025 15:00",
+    "descricaoProblema": "Manutencao Geral",
+    "status": "Em Manutencao (Sem Elevador)",
+    "valorRetidoCancelamento": 0.0
+  },
+  {
+    "idAgendamento": 5,
+    "cliente": {
+      "id": 8,
+      "nome": "Getúlio Rodrigues",
+      "endereco": "rua primavera",
+      "telefone": "22987873",
+      "email": "getulio@gmail",
+      "cpfAnonimizado": "27127187",
+      "veiculos": [
+        {
+          "modelo": "Ford Fiesta",
+          "placa": "FIE-9809",
+          "cor": "prata",
+          "ano": 2006
+        }
+      ]
+    },
+    "veiculo": {
+      "modelo": "Ford Fiesta",
+      "placa": "FIE-9809",
+      "cor": "prata",
+      "ano": 2006
+    },
+    "dataHora": "15/07/2025 19:30",
+    "descricaoProblema": "troca de oleo",
+    "status": "Entregue",
+    "valorRetidoCancelamento": 0.0
+  },
+  {
+    "idAgendamento": 6,
+    "cliente": {
+      "id": 9,
+      "nome": "Jaime",
+      "endereco": "Rua Juscelino",
+      "telefone": "229939393",
+      "email": "Jaime@outlook",
+      "cpfAnonimizado": "12112123",
+      "veiculos": [
+        {
+          "modelo": "Ford KA",
+          "placa": "FKA-2718",
+          "cor": "azul",
+          "ano": 2004
+        }
+      ]
+    },
+    "veiculo": {
+      "modelo": "Ford KA",
+      "placa": "FKA-2718",
+      "cor": "azul",
+      "ano": 2004
+    },
+    "dataHora": "14/07/2025 10:00",
+    "descricaoProblema": "Troca de Pneu",
+    "status": "Entregue",
+    "valorRetidoCancelamento": 0.0
   }
 ]

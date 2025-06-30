@@ -15,7 +15,7 @@
     "descricao": "Pneu é um Pneu uai",
     "precoCusto": 300.0,
     "precoVenda": 350.0,
-    "quantidadeEstoque": 10,
+    "quantidadeEstoque": 8,
     "idFornecedor": 1,
     "nomeFornecedor": "Steve Rogers"
   },
@@ -25,7 +25,7 @@
     "descricao": "Elementos de desgaste que garantem a frenagem eficiente ao pressionar os discos de freio.",
     "precoCusto": 40.0,
     "precoVenda": 50.0,
-    "quantidadeEstoque": 15,
+    "quantidadeEstoque": 14,
     "idFornecedor": 1,
     "nomeFornecedor": "Steve Rogers"
   },
@@ -35,7 +35,37 @@
     "descricao": "Oleo para motor",
     "precoCusto": 30.0,
     "precoVenda": 35.0,
-    "quantidadeEstoque": 5,
+    "quantidadeEstoque": 4,
+    "idFornecedor": 1,
+    "nomeFornecedor": "Steve Rogers"
+  },
+  {
+    "idProduto": 5,
+    "nome": "Discos de Freio",
+    "descricao": "são componentes circulares metálicos que, ao serem pressionados pelas pastilhas, geram atrito para reduzir a velocidade do veículo.",
+    "precoCusto": 20.0,
+    "precoVenda": 30.0,
+    "quantidadeEstoque": 10,
+    "idFornecedor": 1,
+    "nomeFornecedor": "Steve Rogers"
+  },
+  {
+    "idProduto": 6,
+    "nome": "Oleo de transmissao",
+    "descricao": "Eh um lubrificante essencial que reduz o atrito e protege os componentes internos do câmbio",
+    "precoCusto": 50.0,
+    "precoVenda": 70.0,
+    "quantidadeEstoque": 15,
+    "idFornecedor": 1,
+    "nomeFornecedor": "Steve Rogers"
+  },
+  {
+    "idProduto": 7,
+    "nome": "Buchas de Suspensao",
+    "descricao": "sao peças de borracha ou poliuretano que absorvem impactos e reduzem vibracoes entre os componentes da suspensão do veiculo.",
+    "precoCusto": 15.0,
+    "precoVenda": 25.0,
+    "quantidadeEstoque": 20,
     "idFornecedor": 1,
     "nomeFornecedor": "Steve Rogers"
   }
