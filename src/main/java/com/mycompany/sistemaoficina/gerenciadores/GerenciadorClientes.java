@@ -7,6 +7,8 @@ import com.mycompany.sistemaoficina.Clientes;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -126,7 +128,32 @@ public class GerenciadorClientes {
             System.out.println("ID: " + c.getId() + " | Nome: " + c.getNome() + " | CPF: " + c.getCpfAnonimizado());
         }
     }
+     
+  /**
+ * Realiza uma busca linear em uma lista de clientes usando um Iterator.
+ * Este metodo percorre cada elemento da lista sequencialmente.
+ * @param lista A lista de clientes onde a busca sera realizada.
+ * @param chaveDeBusca Um objeto Cliente contendo os dados a serem procurados.
+ * @param comparator O Comparator que define o criterio de comparacao (ex: por ID, por nome).
+ * @return O objeto Cliente encontrado, ou null se nao for encontrado.
+ */
+public static Clientes find(List<Clientes> lista, Clientes chaveDeBusca, Comparator<Clientes> comparator) {
+    // Obtem um Iterator para a lista
+    Iterator<Clientes> iterator = lista.iterator();
     
+    // Percorre a lista usando o Iterator
+    while (iterator.hasNext()) {
+        Clientes clienteAtual = iterator.next();
+        
+        // Usa o Comparator fornecido para verificar se o cliente atual e o que procuramos
+        // comparator.compare() retorna 0 se os objetos forem iguais de acordo com o criterio
+        if (comparator.compare(clienteAtual, chaveDeBusca) == 0) {
+            return clienteAtual; // Retorna o cliente se for encontrado
+        }
+    }
+    
+    return null; // Retorna null se o loop terminar sem encontrar o cliente
+}
     
     /**
      * Conduz o fluxo de trabalho para cadastrar um novo cliente no sistema.

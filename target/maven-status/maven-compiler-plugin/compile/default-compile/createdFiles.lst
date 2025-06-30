@@ -9,6 +9,7 @@ com\mycompany\sistemaoficina\gerenciadores\GerenciadorServicos.class
 com\mycompany\sistemaoficina\OrdemDeServico.class
 com\mycompany\sistemaoficina\gerenciadores\GerenciadorDespesas.class
 com\mycompany\sistemaoficina\gerenciadores\GerenciadorElevadores.class
+com\mycompany\sistemaoficina\TestesSistema.class
 com\mycompany\sistemaoficina\Agendamento.class
 com\mycompany\sistemaoficina\gerenciadores\GerenciadorEstoque$1.class
 com\mycompany\sistemaoficina\gerenciadores\GerenciadorGerentes.class

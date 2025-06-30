@@ -35,7 +35,6 @@ public class GerenciadorAgendamentos {
     private List<Agendamento> listaAgendamentos;
     private static final String ARQUIVO_AGENDAMENTOS_JSON = "agendamentos.json";
     private final GerenciadorClientes gerenciadorClientes;
-    private final GerenciadorFuncionarios gerenciadorFuncionarios;
     private final GerenciadorElevadores gerenciadorElevadores;
     private final GerenciadorOrdensDeServico gerenciadorOS;
 
@@ -67,7 +66,6 @@ public class GerenciadorAgendamentos {
      */
     public GerenciadorAgendamentos(GerenciadorClientes gerenciadorClientes, GerenciadorFuncionarios gerenciadorFuncionarios, GerenciadorElevadores gerenciadorElevadores, GerenciadorOrdensDeServico gerenciadorOS) {
         this.gerenciadorClientes = gerenciadorClientes;
-        this.gerenciadorFuncionarios = gerenciadorFuncionarios;
         this.gerenciadorElevadores = gerenciadorElevadores;
         this.gerenciadorOS = gerenciadorOS;
         this.listaAgendamentos = carregarDadosAgendamentos();

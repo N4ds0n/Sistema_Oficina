@@ -28,5 +28,15 @@
     "quantidadeEstoque": 15,
     "idFornecedor": 1,
     "nomeFornecedor": "Steve Rogers"
+  },
+  {
+    "idProduto": 4,
+    "nome": "Oleo para motor",
+    "descricao": "Oleo para motor",
+    "precoCusto": 30.0,
+    "precoVenda": 35.0,
+    "quantidadeEstoque": 5,
+    "idFornecedor": 1,
+    "nomeFornecedor": "Steve Rogers"
   }
 ]

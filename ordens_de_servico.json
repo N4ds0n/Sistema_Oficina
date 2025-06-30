@@ -76,5 +76,29 @@
     "valorTotal": 0.0,
     "dataEmissao": "26/06/2025 17:45",
     "status": "Finalizada"
+  },
+  {
+    "idOrdemDeServico": 4,
+    "idAgendamento": 99,
+    "nomeCliente": "Ernesto N. Silva",
+    "modeloVeiculo": "Ford KA",
+    "placaVeiculo": "FOK-0808",
+    "servicosRealizados": [],
+    "pecasUtilizadas": [],
+    "valorTotal": 0.0,
+    "dataEmissao": "30/06/2025 11:27",
+    "status": "Aberta"
+  },
+  {
+    "idOrdemDeServico": 5,
+    "idAgendamento": 99,
+    "nomeCliente": "Ernesto N. Silva",
+    "modeloVeiculo": "Ford KA",
+    "placaVeiculo": "FOK-0808",
+    "servicosRealizados": [],
+    "pecasUtilizadas": [],
+    "valorTotal": 0.0,
+    "dataEmissao": "30/06/2025 13:02",
+    "status": "Aberta"
   }
 ]
