@@ -1,0 +1,16 @@
+[
+  {
+    "idDespesa": 1,
+    "descricao": "Conta de Luz",
+    "valor": 500.0,
+    "data": "25/06/2025 15:36",
+    "categoria": "Contas"
+  },
+  {
+    "idDespesa": 2,
+    "descricao": "Pagamento de Salário do mecanico geral",
+    "valor": 3000.0,
+    "data": "25/06/2025 15:38",
+    "categoria": "Salarios"
+  }
+]

@@ -1,0 +1,42 @@
+[
+  {
+    "idServico": 1,
+    "descricao": "Alinhamento de direcao",
+    "valor": 80.0
+  },
+  {
+    "idServico": 2,
+    "descricao": "Balanceamento de rodas(4x)",
+    "valor": 60.0
+  },
+  {
+    "idServico": 3,
+    "descricao": "Alinhamento e Balanceamento",
+    "valor": 150.0
+  },
+  {
+    "idServico": 4,
+    "descricao": "Troca de Pastilhas de Freio",
+    "valor": 150.0
+  },
+  {
+    "idServico": 5,
+    "descricao": "Troca de Bateria",
+    "valor": 250.0
+  },
+  {
+    "idServico": 6,
+    "descricao": "Troca de Amortecedores(par)",
+    "valor": 200.0
+  },
+  {
+    "idServico": 7,
+    "descricao": "Revisao Completa",
+    "valor": 600.0
+  },
+  {
+    "idServico": 8,
+    "descricao": "Troca de Filtro de Ar",
+    "valor": 50.0
+  }
+]

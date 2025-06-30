@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "nome": "Barry Allen",
+    "cpf": "123456",
+    "senha": "123456"
+  },
+  {
+    "id": 2,
+    "nome": "Bruce Wayne",
+    "cpf": "54321",
+    "senha": "54321"
+  },
+  {
+    "id": 3,
+    "nome": "Peter Parker",
+    "cpf": "1234567",
+    "senha": "1234567"
+  },
+  {
+    "id": 4,
+    "nome": "Clark Kent",
+    "cpf": "56789",
+    "senha": "56789"
+  }
+]
