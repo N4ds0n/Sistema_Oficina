@@ -76,5 +76,5 @@ Este sistema foi desenvolvido com base em um cenário realista, simulando a gest
 
 * **Nádson Nascimento Santos**
   Aluno do curso de Sistemas de Informação na UFVJM
-  E-mail: [santos.nadson@ufvjm.edu.bt]
+  E-mail: [santos.nadson@ufvjm.edu.br]
 
